@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Results | WhatsApp Analyzer{% endblock %}
+
+{% block content %}
+<div class="results-section">
+    <h2>📊 Analysis Results</h2>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Messages</h3>
+            <p class="stat-value" id="totalMessages">{{ stats.total_messages }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Unique Users</h3>
+            <p class="stat-value" id="uniqueUsers">{{ stats.unique_users }}</p>
+        </div>
+    </div>
+    
+    <div class="download-section">
+        <h3>📥 Download Results</h3>
+        <button class="btn btn-secondary" onclick="alert('Feature coming soon')">Download CSV</button>
+        <button class="btn btn-secondary" onclick="window.location.href='/'">Analyze Another Chat</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Upload | WhatsApp Analyzer{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>WhatsApp Chat Sentiment Analysis</h2>
+    <p>Upload your WhatsApp chat export and get instant sentiment analysis</p>
+</div>
+
+<div class="upload-section">
+    <div class="upload-box">
+        <h3>📤 Upload WhatsApp Chat</h3>
+        
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="file-input-wrapper">
+                <input type="file" id="fileInput" name="file" accept=".txt" required>
+                <label for="fileInput" class="file-label">
+                    Choose .txt file or drag & drop
+                </label>
+            </div>
+            
+            <div id="fileInfo" class="file-info" style="display: none;">
+                <p>📄 <span id="fileName"></span></p>
+                <p>Size: <span id="fileSize"></span></p>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Analyze Chat</button>
+        </form>
+        
+        <div id="progressSection" style="display: none;">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p id="progressText">Analyzing your chat...</p>
+        </div>
+        
+        <div id="errorSection" style="display: none;" class="alert alert-error">
+            <p id="errorText"></p>
+        </div>
+    </div>
+    
+    <div class="info-box">
+        <h4>How to get your WhatsApp export:</h4>
+        <ol>
+            <li>Open WhatsApp → Select Chat</li>
+            <li>More options (⋮) → Export Chat</li>
+            <li>Choose "Without Media"</li>
+            <li>Save .txt file</li>
+            <li>Upload here</li>
+        </ol>
+    </div>
+</div>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('Please select a file');
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    document.getElementById('progressSection').style.display = 'block';
+    document.getElementById('errorSection').style.display = 'none';
+    
+    try {
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Analysis complete! Redirecting to results...');
+            window.location.href = '/results';
+        } else {
+            document.getElementById('errorSection').style.display = 'block';
+            document.getElementById('errorText').textContent = data.error;
+        }
+    } catch (error) {
+        document.getElementById('errorSection').style.display = 'block';
+        document.getElementById('errorText').textContent = error.message;
+    }
+});
+
+// File info display
+document.getElementById('fileInput').addEventListener('change', () => {
+    if (document.getElementById('fileInput').files.length > 0) {
+        const file = document.getElementById('fileInput').files[0];
+        document.getElementById('fileInfo').style.display = 'block';
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+    }
+});
+</script>
+{% endblock %}
