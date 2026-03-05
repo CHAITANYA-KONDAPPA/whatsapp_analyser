@@ -8,7 +8,7 @@
 # WHY     : Every other module (sentiment, visualizer, etc.) depends on this
 #           DataFrame. If the parser is wrong, everything downstream is wrong.
 #
-# AUTHOR  : Team — Chaitanya / Anudeep / Ram Teja
+# AUTHOR  : Chaitanya
 # =============================================================================
 
 import re
