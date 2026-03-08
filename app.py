@@ -22,6 +22,7 @@
 # =============================================================================
 
 import os
+import json
 import logging
 import traceback
 from logging.handlers import RotatingFileHandler
@@ -43,6 +44,7 @@ from flask import (
 from config import Paths, FlaskConfig, LogConfig
 from src.pipeline             import run_pipeline, get_pipeline_status
 from src.sentiment_classifier import predict_sentiment
+from src.sentiment_analyzer   import get_sentiment_over_time
 
 
 # --------------------------------------------------------------------------- #
@@ -285,14 +287,104 @@ def dashboard():
     if not output.top_emojis.empty:
         top_emojis_list = list(output.top_emojis.items())
 
+    # ── Serialize raw NLPResult data for Plotly charts (JSON) ────────────── #
+    nlp = output.nlp_result
+    chart_data = {}
+
+    if nlp:
+        # Activity data
+        chart_data['hourly']  = nlp.hour_activity.tolist() if not nlp.hour_activity.empty else []
+        chart_data['daily']   = {
+            'labels': nlp.day_activity.index.tolist(),
+            'values': nlp.day_activity.tolist(),
+        } if not nlp.day_activity.empty else {}
+        chart_data['monthly'] = {
+            'labels': [str(k) for k in nlp.month_activity.index.tolist()],
+            'values': nlp.month_activity.tolist(),
+        } if not nlp.month_activity.empty else {}
+
+        # Word data
+        top_words = nlp.word_frequencies.most_common(20)
+        chart_data['top_words']  = {'words': [w for w,_ in top_words], 'counts': [c for _,c in top_words]}
+        top_bigrams = nlp.bigrams.most_common(10)
+        chart_data['bigrams']    = {'phrases': [' '.join(b) if isinstance(b,tuple) else str(b) for b,_ in top_bigrams], 'counts': [c for _,c in top_bigrams]}
+        chart_data['tfidf']      = {s: [w for w,_ in kws] for s, kws in nlp.tfidf_keywords.items()}
+        chart_data['response_times'] = output.nlp_result.response_times if output.nlp_result.response_times else {}
+
+        # User participation
+        if not nlp.user_stats.empty:
+            chart_data['user_msgs'] = {
+                'senders': nlp.user_stats['sender'].tolist(),
+                'counts' : nlp.user_stats['total_messages'].tolist(),
+            }
+        else:
+            chart_data['user_msgs'] = {}
+
+    # Sentiment data for Plotly
+    if not output.sentiment_by_sender.empty:
+        sb = output.sentiment_by_sender
+        chart_data['sentiment_by_sender'] = {
+            'senders'    : sb['sender'].tolist(),
+            'positive'   : sb['positive_pct'].tolist(),
+            'neutral'    : sb['neutral_pct'].tolist(),
+            'negative'   : sb['negative_pct'].tolist(),
+            'avg_scores' : sb['avg_score'].tolist(),
+        }
+
+    # Sentiment over time
+    try:
+        sent_trend = get_sentiment_over_time(output.df, freq='W')
+        if not sent_trend.empty:
+            chart_data['sentiment_trend'] = {
+                'dates' : [str(d) for d in sent_trend.index.tolist()],
+                'scores': sent_trend.tolist(),
+            }
+    except Exception:
+        chart_data['sentiment_trend'] = {}
+
+    # Overall sentiment distribution
+    chart_data['sentiment_dist'] = {
+        'labels': ['Positive', 'Neutral', 'Negative'],
+        'values': [
+            round(output.overall_mood.get('positive_pct', 0), 1),
+            round(output.overall_mood.get('neutral_pct',  0), 1),
+            round(output.overall_mood.get('negative_pct', 0), 1),
+        ],
+    }
+
+    # Emojis
+    chart_data['emojis'] = {
+        'emojis': [e for e, _ in top_emojis_list],
+        'counts': [c for _, c in top_emojis_list],
+    }
+
+    # Model data
+    meta = output.model_metadata
+    if meta:
+        chart_data['model'] = {
+            'accuracy'        : meta.get('accuracy',         0),
+            'f1_score'        : meta.get('f1_score',         0),
+            'cv_mean'         : meta.get('cross_val_mean',   0),
+            'cv_std'          : meta.get('cross_val_std',    0),
+            'training_samples': meta.get('training_samples', 0),
+            'test_samples'    : meta.get('test_samples',     0),
+            'model_name'      : meta.get('model_name',       ''),
+            'trained_at'      : meta.get('trained_at',       ''),
+            'classes'         : meta.get('classes',          []),
+        }
+
     return render_template(
         'dashboard.html',
-        chart_urls      = chart_urls,
+        chart_data      = json.dumps(chart_data),
         overall_mood    = output.overall_mood,
         chat_summary    = output.chat_summary,
         nlp_summary     = output.nlp_summary,
         model_metadata  = output.model_metadata,
         top_emojis      = top_emojis_list,
+        sentiment_rows  = _dataframe_to_records(output.sentiment_by_sender),
+        user_stats_rows = _dataframe_to_records(nlp.user_stats) if nlp and not nlp.user_stats.empty else [],
+        tfidf_keywords  = nlp.tfidf_keywords if nlp else {},
+        response_times  = nlp.response_times if nlp else {},
         processing_time = output.processing_time,
         mode_used       = output.mode_used,
         ml_trained      = output.ml_trained,

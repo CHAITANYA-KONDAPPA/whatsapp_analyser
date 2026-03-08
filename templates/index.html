@@ -1,104 +1,206 @@
-{% extends "base.html" %}
-
-{% block title %}Upload | WhatsApp Analyzer{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Upload — WhatsApp NLP Analyser{% endblock %}
+{% block topbar_title %}Upload Chat{% endblock %}
+{% block topbar_sub %}&nbsp;/&nbsp;Export your WhatsApp chat and drop it here{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <h2>WhatsApp Chat Sentiment Analysis</h2>
-    <p>Upload your WhatsApp chat export and get instant sentiment analysis</p>
+<div style="max-width:560px;margin:0 auto;padding-top:6px;">
+
+  <!-- HERO -->
+  <div style="text-align:center;margin-bottom:26px;">
+    <div style="font-size:3rem;margin-bottom:10px;">💬</div>
+    <h1 style="font-family:var(--font-mono);font-size:1.35rem;font-weight:700;margin-bottom:8px;">
+      WhatsApp NLP Analyser
+    </h1>
+    <p style="color:var(--text1);font-size:14px;line-height:1.6;">
+      Upload a <b style="color:var(--text0);">.txt</b> chat export and get interactive Plotly charts,
+      per-sender sentiment breakdowns, and ML-powered insights.
+    </p>
+  </div>
+
+  <!-- UPLOAD CARD -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-head">
+      <div>
+        <div class="card-title">📁 Upload Chat File</div>
+        <div class="card-sub">.txt export only · max 16 MB</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+        <!-- Drop zone -->
+        <div id="dropZone" onclick="document.getElementById('chatFile').click()"
+             style="border:2px dashed var(--border);border-radius:var(--radius);
+                    padding:2.2rem 1rem;text-align:center;cursor:pointer;
+                    background:var(--bg2);transition:all .2s;">
+          <div style="font-size:2rem;margin-bottom:8px;">📄</div>
+          <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--text0);margin-bottom:4px;">
+            Click to browse or drag &amp; drop
+          </div>
+          <div style="font-size:12px;color:var(--text2);">WhatsApp .txt export file</div>
+          <div id="fileLabel" style="display:none;margin-top:8px;font-family:var(--font-mono);font-size:11px;color:var(--green);"></div>
+        </div>
+        <input type="file" id="chatFile" name="chat_file" accept=".txt" style="display:none;"
+               onchange="onFileChosen(this)"/>
+
+        <!-- Retrain toggle -->
+        <label style="display:flex;align-items:center;gap:8px;margin-top:13px;cursor:pointer;">
+          <input type="checkbox" id="forceRetrain" name="force_retrain" value="true"
+                 style="accent-color:var(--accent);width:15px;height:15px;"/>
+          <span style="font-size:12px;color:var(--text2);">
+            Force retrain ML model
+            <span style="color:var(--text2);font-style:italic;">(recommended when uploading a new chat)</span>
+          </span>
+        </label>
+
+        <!-- Submit -->
+        <button type="submit" id="submitBtn"
+                style="width:100%;margin-top:14px;padding:11px;background:var(--accent);
+                       border:none;border-radius:var(--radius-sm);color:#fff;
+                       font-family:var(--font-mono);font-size:12px;font-weight:700;
+                       cursor:pointer;transition:opacity .2s,transform .1s;"
+                onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          ⚡ ANALYSE CHAT
+        </button>
+
+      </form>
+
+      <!-- Loading indicator (shown on submit) -->
+      <div id="loadingDiv" style="display:none;text-align:center;padding:18px 0;">
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--text2);margin-bottom:10px;"
+             id="loadStage">PARSING CHAT FILE...</div>
+        <div style="height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;">
+          <div style="height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));
+                      border-radius:2px;animation:loadBar 1.6s ease-in-out infinite;width:35%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS CARD -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-head">
+      <div>
+        <div class="card-title">⊛ System Status</div>
+        <div class="card-sub">Current model and output state</div>
+      </div>
+    </div>
+    <div class="card-body" style="padding:14px 16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div class="stat" style="--sc:{{ 'var(--green)' if status.model_trained else 'var(--yellow)' }}">
+          <div class="stat-lbl">ML Model</div>
+          <div class="stat-val" style="font-size:1.4rem;">{{ '✓' if status.model_trained else '–' }}</div>
+          <div class="stat-sub">{{ 'Trained' if status.model_trained else 'Not trained' }}</div>
+        </div>
+        <div class="stat" style="--sc:var(--blue)">
+          <div class="stat-lbl">Charts</div>
+          <div class="stat-val" style="font-size:1.4rem;">{{ status.charts_available }}/10</div>
+          <div class="stat-sub">saved PNGs</div>
+        </div>
+        <div class="stat" style="--sc:{{ 'var(--green)' if status.model_trained else 'var(--yellow)' }}">
+          <div class="stat-lbl">Accuracy</div>
+          <div class="stat-val" style="font-size:1.4rem;">
+            {% if status.model_metadata and status.model_metadata.accuracy %}
+              {{ (status.model_metadata.accuracy * 100) | round(1) }}%
+            {% else %}N/A{% endif %}
+          </div>
+          <div class="stat-sub">last run</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPORT GUIDE -->
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">? How to Export from WhatsApp</div>
+        <div class="card-sub">Android and iPhone instructions</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="g2" style="gap:16px;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--blue);
+                      margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">Android</div>
+          <ol style="font-size:13px;color:var(--text1);padding-left:18px;line-height:2.1;">
+            <li>Open any WhatsApp chat</li>
+            <li>Tap <b style="color:var(--text0)">⋮</b> → More → Export chat</li>
+            <li>Choose <b style="color:var(--text0)">Without Media</b></li>
+            <li>Share the <b style="color:var(--text0)">.txt</b> file here</li>
+          </ol>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--purple);
+                      margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">iPhone</div>
+          <ol style="font-size:13px;color:var(--text1);padding-left:18px;line-height:2.1;">
+            <li>Open any WhatsApp chat</li>
+            <li>Tap contact name → Export Chat</li>
+            <li>Choose <b style="color:var(--text0)">Without Media</b></li>
+            <li>Share the <b style="color:var(--text0)">.txt</b> file here</li>
+          </ol>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding:10px 13px;background:rgba(88,166,255,.07);
+                  border:1px solid rgba(88,166,255,.2);border-radius:var(--radius-sm);
+                  font-size:12px;color:var(--blue);">
+        🔒 Your chat is processed locally on the server and never stored permanently.
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="upload-section">
-    <div class="upload-box">
-        <h3>📤 Upload WhatsApp Chat</h3>
-        
-        <form id="uploadForm" enctype="multipart/form-data">
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" name="file" accept=".txt" required>
-                <label for="fileInput" class="file-label">
-                    Choose .txt file or drag & drop
-                </label>
-            </div>
-            
-            <div id="fileInfo" class="file-info" style="display: none;">
-                <p>📄 <span id="fileName"></span></p>
-                <p>Size: <span id="fileSize"></span></p>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Analyze Chat</button>
-        </form>
-        
-        <div id="progressSection" style="display: none;">
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill"></div>
-            </div>
-            <p id="progressText">Analyzing your chat...</p>
-        </div>
-        
-        <div id="errorSection" style="display: none;" class="alert alert-error">
-            <p id="errorText"></p>
-        </div>
-    </div>
-    
-    <div class="info-box">
-        <h4>How to get your WhatsApp export:</h4>
-        <ol>
-            <li>Open WhatsApp → Select Chat</li>
-            <li>More options (⋮) → Export Chat</li>
-            <li>Choose "Without Media"</li>
-            <li>Save .txt file</li>
-            <li>Upload here</li>
-        </ol>
-    </div>
-</div>
+<style>
+  @keyframes loadBar {
+    0%{transform:translateX(-200%)} 100%{transform:translateX(400%)}
+  }
+</style>
+{% endblock %}
 
+{% block extra_js %}
 <script>
-document.getElementById('uploadForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
-    
-    if (!file) {
-        alert('Please select a file');
-        return;
-    }
-    
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    document.getElementById('progressSection').style.display = 'block';
-    document.getElementById('errorSection').style.display = 'none';
-    
-    try {
-        const response = await fetch('/upload', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            alert('Analysis complete! Redirecting to results...');
-            window.location.href = '/results';
-        } else {
-            document.getElementById('errorSection').style.display = 'block';
-            document.getElementById('errorText').textContent = data.error;
-        }
-    } catch (error) {
-        document.getElementById('errorSection').style.display = 'block';
-        document.getElementById('errorText').textContent = error.message;
-    }
-});
+  function onFileChosen(input) {
+    if (!input.files.length) return;
+    const lbl = document.getElementById('fileLabel');
+    const dz  = document.getElementById('dropZone');
+    lbl.textContent    = '✓ ' + input.files[0].name;
+    lbl.style.display  = 'block';
+    dz.style.borderColor = 'var(--green)';
+    dz.style.background  = 'rgba(63,185,80,.05)';
+  }
 
-// File info display
-document.getElementById('fileInput').addEventListener('change', () => {
-    if (document.getElementById('fileInput').files.length > 0) {
-        const file = document.getElementById('fileInput').files[0];
-        document.getElementById('fileInfo').style.display = 'block';
-        document.getElementById('fileName').textContent = file.name;
-        document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
-    }
-});
+  // Drag & drop
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover', e => {
+    e.preventDefault();
+    dz.style.borderColor = 'var(--blue)';
+    dz.style.background  = 'rgba(88,166,255,.05)';
+  });
+  dz.addEventListener('dragleave', () => {
+    dz.style.borderColor = 'var(--border)';
+    dz.style.background  = 'var(--bg2)';
+  });
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    const inp = document.getElementById('chatFile');
+    inp.files = e.dataTransfer.files;
+    onFileChosen(inp);
+  });
+
+  // Show loading on submit
+  const stages = ['PARSING CHAT FILE...','RUNNING NLP...','ANALYSING SENTIMENT...','TRAINING ML MODEL...','GENERATING CHARTS...'];
+  let stageIdx = 0;
+  document.getElementById('uploadForm').addEventListener('submit', function() {
+    if (!document.getElementById('chatFile').files.length) return;
+    document.getElementById('submitBtn').style.display  = 'none';
+    document.getElementById('loadingDiv').style.display = 'block';
+    setInterval(() => {
+      stageIdx = (stageIdx + 1) % stages.length;
+      const el = document.getElementById('loadStage');
+      if (el) el.textContent = stages[stageIdx];
+    }, 2200);
+  });
 </script>
 {% endblock %}

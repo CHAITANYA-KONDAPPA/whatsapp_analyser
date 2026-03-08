@@ -1,26 +1,293 @@
-{% extends "base.html" %}
-
-{% block title %}Results | WhatsApp Analyzer{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Results — WhatsApp NLP Analyser{% endblock %}
+{% block topbar_title %}Detailed Results{% endblock %}
+{% block topbar_sub %}&nbsp;/&nbsp;Per-sender breakdown{% endblock %}
+{% block topbar_badges %}
+  {% if model_metadata %}
+  <span class="pill pill-green">{{ model_metadata.get('model_name','–') }}</span>
+  <span class="pill pill-blue">{{ (model_metadata.get('accuracy',0)*100)|round(1) }}% accuracy</span>
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-<div class="results-section">
-    <h2>📊 Analysis Results</h2>
-    
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Total Messages</h3>
-            <p class="stat-value" id="totalMessages">{{ stats.total_messages }}</p>
-        </div>
-        <div class="stat-card">
-            <h3>Unique Users</h3>
-            <p class="stat-value" id="uniqueUsers">{{ stats.unique_users }}</p>
-        </div>
-    </div>
-    
-    <div class="download-section">
-        <h3>📥 Download Results</h3>
-        <button class="btn btn-secondary" onclick="alert('Feature coming soon')">Download CSV</button>
-        <button class="btn btn-secondary" onclick="window.location.href='/'">Analyze Another Chat</button>
-    </div>
+
+<!-- QUICK STATS -->
+<div class="stats-grid" style="margin-bottom:22px;">
+  <div class="stat" style="--sc:var(--blue)">
+    <div class="stat-lbl">Participants</div>
+    <div class="stat-val" data-count="{{ chat_summary.get('total_senders',0)|int }}">0</div>
+    <div class="stat-sub">unique senders</div>
+  </div>
+  <div class="stat" style="--sc:var(--green)">
+    <div class="stat-lbl">Most Active</div>
+    <div class="stat-val" style="font-size:1rem;">{{ chat_summary.get('most_active_user','–') }}</div>
+    <div class="stat-sub">by message count</div>
+  </div>
+  <div class="stat" style="--sc:var(--purple)">
+    <div class="stat-lbl">Total Words</div>
+    <div class="stat-val" data-count="{{ chat_summary.get('total_words','0')|replace(',','')|int }}">0</div>
+    <div class="stat-sub">across all senders</div>
+  </div>
+  <div class="stat" style="--sc:var(--orange)">
+    <div class="stat-lbl">Most Active Day</div>
+    <div class="stat-val" style="font-size:1rem;">{{ chat_summary.get('most_active_day','–') }}</div>
+    <div class="stat-sub">day of week</div>
+  </div>
 </div>
+
+<!-- SENTIMENT BY SENDER TABLE -->
+{% if sentiment_rows %}
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-head">
+    <div>
+      <div class="card-title">Sentiment by Sender</div>
+      <div class="card-sub">Click any column header to sort · Positive/Neutral/Negative %</div>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="tbl sortable-table" id="sentTable">
+      <thead>
+        <tr>
+          <th>Sender</th>
+          <th>Messages</th>
+          <th>Sentiment Split</th>
+          <th>Positive %</th>
+          <th>Neutral %</th>
+          <th>Negative %</th>
+          <th>Avg Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in sentiment_rows %}
+        <tr>
+          <td style="font-weight:600;color:var(--text0);">{{ row.sender }}</td>
+          <td style="font-family:var(--font-mono);">{{ row.total | int }}</td>
+          <td>
+            <div class="mini-bar" style="min-width:120px;">
+              <div class="mini-seg" style="width:{{ row.positive_pct }}%;background:var(--green);"></div>
+              <div class="mini-seg" style="width:{{ row.neutral_pct }}%;background:var(--yellow);"></div>
+              <div class="mini-seg" style="width:{{ row.negative_pct }}%;background:var(--red);"></div>
+            </div>
+          </td>
+          <td style="color:var(--green);font-family:var(--font-mono);">{{ row.positive_pct }}%</td>
+          <td style="color:var(--yellow);font-family:var(--font-mono);">{{ row.neutral_pct }}%</td>
+          <td style="color:var(--red);font-family:var(--font-mono);">{{ row.negative_pct }}%</td>
+          <td style="font-family:var(--font-mono);font-weight:700;
+                     color:{{ 'var(--green)' if row.avg_score > 0.05 else 'var(--red)' if row.avg_score < -0.05 else 'var(--yellow)' }};">
+            {{ '%+.3f' | format(row.avg_score) }}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<!-- USER STATS + RESPONSE TIMES side by side -->
+<div class="g2" style="margin-bottom:20px;">
+
+  <!-- User Activity Stats -->
+  {% if user_stats_rows %}
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Activity Stats per Sender</div>
+        <div class="card-sub">Messages, words, emojis, links</div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="tbl sortable-table">
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Msgs</th>
+            <th>Words</th>
+            <th>Avg W/M</th>
+            <th>Emojis</th>
+            <th>URLs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in user_stats_rows %}
+          <tr>
+            <td style="font-weight:600;color:var(--text0);">{{ row.sender }}</td>
+            <td style="font-family:var(--font-mono);">{{ row.total_messages | int }}</td>
+            <td style="font-family:var(--font-mono);">{{ row.total_words | int }}</td>
+            <td style="font-family:var(--font-mono);">{{ row.avg_words_per_msg }}</td>
+            <td style="font-family:var(--font-mono);">{{ row.total_emojis | int }}</td>
+            <td style="font-family:var(--font-mono);">{{ row.urls_shared | int }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Response Times -->
+  {% if response_times %}
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Average Response Time</div>
+        <div class="card-sub">How quickly each sender replies</div>
+      </div>
+    </div>
+    <div id="ch-response" style="padding:4px;"></div>
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- TF-IDF KEYWORDS -->
+{% if tfidf_keywords %}
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-head">
+    <div>
+      <div class="card-title">TF-IDF Signature Keywords</div>
+      <div class="card-sub">Each sender's most unique vocabulary — not just frequent, but distinctive</div>
+    </div>
+  </div>
+  {% set sender_colors = ['#58a6ff','#3fb950','#ffa657','#bc8cff','#f85149','#39d353'] %}
+  {% for sender, keywords in tfidf_keywords.items() %}
+  <div style="padding:13px 16px;border-bottom:1px solid var(--border);">
+    <div style="font-family:var(--font-mono);font-size:11px;
+                color:{{ sender_colors[loop.index0 % sender_colors|length] }};
+                margin-bottom:9px;text-transform:uppercase;letter-spacing:.8px;">
+      ◈ {{ sender }}
+    </div>
+    <div>
+      {% for word, score in keywords %}
+      <span class="chip" title="TF-IDF score: {{ '%.4f'|format(score) }}">{{ word }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- PROCESSING STATS -->
+{% if processing_stats %}
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-head">
+    <div>
+      <div class="card-title">Processing Stats</div>
+      <div class="card-sub">What the data cleaning pipeline found</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+      {% for key, val in processing_stats.items() %}
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);
+                  padding:12px 14px;">
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--text2);
+                    text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">
+          {{ key | replace('_',' ') }}
+        </div>
+        <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--text0);">
+          {{ val }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ML MODEL FULL DETAILS -->
+{% if model_metadata %}
+<div class="card">
+  <div class="card-head">
+    <div>
+      <div class="card-title">ML Model Performance</div>
+      <div class="card-sub">Full details from training run</div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px;">
+      {% for lbl, val, sc in [
+        ('Best Model',    model_metadata.get('model_name','–'),                                   'var(--blue)'),
+        ('Test Accuracy', (model_metadata.get('accuracy',0)*100)|round(1)|string + '%',          'var(--green)'),
+        ('F1 Score',      (model_metadata.get('f1_score',0)*100)|round(1)|string + '%',          'var(--blue)'),
+        ('CV Mean',       (model_metadata.get('cross_val_mean',0)*100)|round(1)|string + '%',    'var(--purple)'),
+        ('CV Std',        '± '+(model_metadata.get('cross_val_std',0)*100)|round(2)|string + '%','var(--text1)'),
+        ('Train Samples', model_metadata.get('training_samples',0)|string,                       'var(--orange)'),
+        ('Test Samples',  model_metadata.get('test_samples',0)|string,                           'var(--text1)'),
+        ('Trained At',    model_metadata.get('trained_at','–'),                                  'var(--text1)'),
+      ] %}
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--text2);
+                    text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">{{ lbl }}</div>
+        <div style="font-family:var(--font-mono);font-size:1rem;font-weight:700;color:{{ sc }};">{{ val }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="padding:11px 13px;background:rgba(88,166,255,.07);
+                border:1px solid rgba(88,166,255,.2);border-radius:var(--radius-sm);
+                font-size:12px;color:var(--blue);line-height:1.6;">
+      <b>How this works:</b> The system trains both Naive Bayes and Logistic Regression on high-confidence
+      labelled messages (|score| ≥ 0.5 with VADER + TextBlob agreement), compares 5-fold cross-validation,
+      and picks the winner. The winning model then re-classifies all messages to give you the
+      <code style="font-family:var(--font-mono);">predicted_sentiment</code> column.
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  /* ── RESPONSE TIME CHART ──────────────────────────────────── */
+  (function() {
+    {% if response_times %}
+    const rt = {{ response_times | tojson }};
+    const senders = Object.keys(rt);
+    const seconds = Object.values(rt);
+    if (senders.length) {
+      const labels  = seconds.map(s => s < 60 ? s.toFixed(0)+'s' : s < 3600 ? (s/60).toFixed(0)+'m' : (s/3600).toFixed(1)+'h');
+      Plotly.newPlot('ch-response', [{
+        x:senders, y:seconds, type:'bar',
+        marker:{color:['#58a6ff','#3fb950','#ffa657','#bc8cff','#f85149'].slice(0,senders.length), opacity:.85},
+        text:labels, textposition:'outside',
+        hovertemplate:'<b>%{x}</b>: %{text} avg reply<extra></extra>',
+      }], {
+        ...baseLayout(265),
+        yaxis:{...baseLayout().yaxis, title:{text:'seconds',font:{size:10}}},
+        margin:{t:16,r:16,b:38,l:55},
+      }, PLY);
+    }
+    {% endif %}
+  })();
+
+  /* ── SORTABLE TABLES ──────────────────────────────────────── */
+  const _sortState = {};
+  document.querySelectorAll('table.sortable-table').forEach(table => {
+    table.querySelectorAll('thead th').forEach((th, colIdx) => {
+      th.addEventListener('click', () => {
+        const asc = !_sortState[table.id + colIdx];
+        _sortState[table.id + colIdx] = asc;
+        // Update arrow indicators
+        table.querySelectorAll('thead th').forEach(h => {
+          h.style.color = 'var(--text2)';
+        });
+        th.style.color = 'var(--text0)';
+        th.textContent = th.textContent.replace(/ [↑↓]$/,'') + (asc ? ' ↑' : ' ↓');
+        // Sort rows
+        const tbody = table.querySelector('tbody');
+        const rows  = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort((a,b) => {
+          const at = (a.cells[colIdx]?.innerText||'').trim();
+          const bt = (b.cells[colIdx]?.innerText||'').trim();
+          const an = parseFloat(at.replace(/[^0-9.\-+]/g,''));
+          const bn = parseFloat(bt.replace(/[^0-9.\-+]/g,''));
+          if (!isNaN(an) && !isNaN(bn)) return asc ? an-bn : bn-an;
+          return asc ? at.localeCompare(bt) : bt.localeCompare(at);
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      });
+    });
+  });
+</script>
 {% endblock %}
