@@ -60,8 +60,8 @@ NEGATIVE_THRESHOLD = -0.05
 # Confidence thresholds
 # When VADER compound score is strong (far from 0), confidence is High
 # When it's borderline, confidence is Low
-HIGH_CONFIDENCE_THRESHOLD   = 0.5    # |score| >= 0.5  → High
-MEDIUM_CONFIDENCE_THRESHOLD = 0.2    # |score| >= 0.2  → Medium
+HIGH_CONFIDENCE_THRESHOLD   = 0.35   # |score| >= 0.35 → High (lowered from 0.5 to get more training samples)
+MEDIUM_CONFIDENCE_THRESHOLD = 0.15   # |score| >= 0.15 → Medium
                                      # |score| <  0.2  → Low
 
 # Initialise VADER once — expensive to create, so we reuse one instance
@@ -467,18 +467,35 @@ def get_high_confidence_samples(df: pd.DataFrame, n: int = 100) -> pd.DataFrame:
         Training only on High-confidence VADER labels = cleaner training data
         = better ML model accuracy.
 
+    Bug fix: previously only used 'High' confidence messages, which caused
+    < 30 samples on shorter chats and silently skipped ML training entirely.
+    Now falls back to 'Medium' confidence if High alone is insufficient,
+    then falls back to all text messages as a last resort.
+
     Returns DataFrame with columns: cleaned_message, sentiment_label
     """
-    text_df = df[
+    base = df[
         (~df['is_media']) &
         (~df['is_deleted']) &
-        (df['cleaned_message'].str.strip() != '') &
-        (df['sentiment_confidence'] == 'High')
-    ][['cleaned_message', 'sentiment_label']].copy()
+        (df['cleaned_message'].str.strip() != '')
+    ].copy()
+
+    # Try progressively looser confidence thresholds until we have enough data
+    for confidence_levels in [['High'], ['High', 'Medium'], None]:
+        if confidence_levels is None:
+            text_df = base[['cleaned_message', 'sentiment_label']].copy()
+            tier = 'all messages (fallback)'
+        else:
+            text_df = base[
+                base['sentiment_confidence'].isin(confidence_levels)
+            ][['cleaned_message', 'sentiment_label']].copy()
+            tier = '+'.join(confidence_levels)
+
+        if len(text_df) >= 30 and text_df['sentiment_label'].nunique() >= 2:
+            break
 
     # Sample equally from each class to avoid class imbalance
-    # (prevents model from just predicting "Positive" for everything)
-    classes = text_df['sentiment_label'].unique()
+    classes   = text_df['sentiment_label'].unique()
     min_count = min(text_df['sentiment_label'].value_counts().min(), n)
 
     balanced_samples = []
@@ -488,8 +505,8 @@ def get_high_confidence_samples(df: pd.DataFrame, n: int = 100) -> pd.DataFrame:
         balanced_samples.append(sample)
 
     result = pd.concat(balanced_samples).sample(frac=1, random_state=42).reset_index(drop=True)
-    logger.info(f"High-confidence samples: {len(result)} "
-                f"({len(classes)} classes, ~{min_count} each)")
+    logger.info(f"Training samples: {len(result)} "
+                f"({len(classes)} classes, ~{min_count} each, tier={tier})")
     return result
 
 

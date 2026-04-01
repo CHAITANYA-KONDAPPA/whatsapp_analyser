@@ -227,7 +227,11 @@ def _step_train_ml(df: pd.DataFrame) -> bool:
     try:
         training_df = get_high_confidence_samples(df, n=ML_TRAINING_SAMPLES)
 
-        if len(training_df) < 30:
+        # Bug fix: threshold lowered from 30 to 20 to match the fallback
+        # logic in get_high_confidence_samples(). Previously, the fallback
+        # could return 25 Medium-confidence samples which were then rejected
+        # here, causing silent ML skip even though data was available.
+        if len(training_df) < 20:
             logger.warning(f"  Only {len(training_df)} high-confidence samples — "
                            f"skipping ML training.")
             return False
