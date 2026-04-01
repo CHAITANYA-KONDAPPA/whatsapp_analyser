@@ -74,15 +74,28 @@ logger = logging.getLogger(__name__)
 
 # Where to save the trained model files
 # Pipeline creates this folder if it doesn't exist
-MODELS_DIR = 'models'
-
-MODEL_PATH      = os.path.join(MODELS_DIR, 'sentiment_model.pkl')
-VECTORIZER_PATH = os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl')
-METADATA_PATH   = os.path.join(MODELS_DIR, 'model_metadata.json')
+# ── Use absolute paths from config so the model is always saved/loaded
+# from the same location regardless of what directory Python is run from.
+# Bug fix: previously used hardcoded 'models/' (relative) which caused
+# the model to be written to the wrong directory when run via Flask/gunicorn.
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from config import Paths as _Paths
+    MODELS_DIR      = _Paths.MODELS_DIR
+    MODEL_PATH      = _Paths.MODEL
+    VECTORIZER_PATH = _Paths.VECTORIZER
+    METADATA_PATH   = _Paths.MODEL_METADATA
+except ImportError:
+    # Fallback if config not found (e.g. running classifier standalone)
+    MODELS_DIR      = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'models')
+    MODEL_PATH      = os.path.join(MODELS_DIR, 'sentiment_model.pkl')
+    VECTORIZER_PATH = os.path.join(MODELS_DIR, 'tfidf_vectorizer.pkl')
+    METADATA_PATH   = os.path.join(MODELS_DIR, 'model_metadata.json')
 
 # Minimum messages needed to train a meaningful model
 # Below this we can't reliably split 80/20 and get useful results
-MIN_SAMPLES_REQUIRED = 30
+MIN_SAMPLES_REQUIRED = 20   # lowered from 30 — matches pipeline._step_train_ml threshold
 
 # Train/test split — 80% train, 20% test
 TEST_SIZE    = 0.20
@@ -122,7 +135,7 @@ class ClassifierResult:
     trained_at        : str             = ''
 
 
-# --------------------------------------------------------------------------- #
+# -------------------------------------qq-------------------------------------- #
 # STEP 1 : Prepare training data                                              #
 # --------------------------------------------------------------------------- #
 
