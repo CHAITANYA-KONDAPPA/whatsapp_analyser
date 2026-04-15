@@ -1,19 +1,37 @@
-Flask=3.0.3
+# ============================================================================
+# WhatsApp NLP Analyzer — Production Requirements
+# ============================================================================
+# Python 3.9+ required
+# Install with: pip install -r requirements.txt
+# ============================================================================
+
+# Web Framework
+Flask==3.0.3
 Werkzeug==3.0.3
 gunicorn==22.0.0
 
-
+# Data Processing & Analysis
 pandas==2.2.2
 numpy==1.26.4
 scikit-learn==1.5.1
 
+# NLP & Sentiment Analysis
 nltk==3.9.1
 textblob==0.18.0
 vaderSentiment==3.3.2
 
+# Visualization & Charts
 wordcloud==1.9.3
 matplotlib==3.9.1
 seaborn==0.13.2
 Pillow==10.4.0
+plotly==5.24.1
 
+# Environment & Configuration
 python-dotenv==1.0.1
+
+# Optional: Development & Testing
+# Uncomment to install: pip install -r requirements.txt --with-tools
+pytest==7.4.3; extra == "dev"
+black==24.1.1; extra == "dev"
+pylint==3.0.3; extra == "dev"

@@ -3,9 +3,9 @@
 {% block topbar_title %}Dashboard{% endblock %}
 {% block topbar_sub %}&nbsp;/&nbsp;{{ run_timestamp }}{% endblock %}
 {% block topbar_badges %}
-  {% if ml_trained %}<span class="pill pill-green">✓ ML Trained</span>{% endif %}
-  <span class="pill pill-blue">{{ mode_used }}</span>
-  <span class="pill pill-yellow">⚡ {{ processing_time }}s</span>
+{% if ml_trained %}<span class="pill pill-green">✓ ML Trained</span>{% endif %}
+<span class="pill pill-blue">{{ mode_used }}</span>
+<span class="pill pill-yellow">⚡ {{ processing_time }}s</span>
 {% endblock %}
 
 {% block content %}
@@ -13,9 +13,9 @@
 <!-- TAB BAR -->
 <div id="tabBar" style="display:flex;gap:4px;margin-bottom:22px;background:var(--bg1);
      border:1px solid var(--border);border-radius:var(--radius);padding:5px;">
-  {% for tid, tlbl in [('overview','Overview'),('activity','Activity'),('sentiment','Sentiment'),('words','Words'),('model','ML Model')] %}
-  <button id="btn-{{tid}}" onclick="switchTab('{{tid}}')"
-    style="flex:1;padding:8px 10px;border:none;background:transparent;
+  {% for tid, tlbl in
+  [('overview','Overview'),('activity','Activity'),('sentiment','Sentiment'),('words','Words'),('model','ML Model')] %}
+  <button id="btn-{{tid}}" onclick="switchTab('{{tid}}')" style="flex:1;padding:8px 10px;border:none;background:transparent;
            border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;
            font-weight:500;cursor:pointer;color:var(--text1);transition:all var(--tr);"
     onmouseover="if(this.id!==_activeBtn)this.style.background='var(--bg2)'"
@@ -41,13 +41,13 @@
       <div class="stat-sub">{{ chat_summary.get('date_start','?') }} → {{ chat_summary.get('date_end','?') }}</div>
     </div>
     {# calculate colour once to avoid nested inline ternary and ensure valid CSS #}
-    {% set mood_color = 'var(--green)' if overall_mood.get('overall_label')=='Positive' 
-                         else 'var(--red)' if overall_mood.get('overall_label')=='Negative' 
-                         else 'var(--yellow)' %}
+    {% set mood_color = 'var(--green)' if overall_mood.get('overall_label')=='Positive'
+    else 'var(--red)' if overall_mood.get('overall_label')=='Negative'
+    else 'var(--yellow)' %}
     <div class="stat" style="--sc: {{ mood_color }};">
       <div class="stat-lbl">Mood Score</div>
       <div class="stat-val" style="font-size:1.5rem;"
-           data-count-float="{{ '%+.2f'|format(overall_mood.get('overall_score',0)) }}">0</div>
+        data-count-float="{{ '%+.2f'|format(overall_mood.get('overall_score',0)) }}">0</div>
       <div class="stat-sub">{{ overall_mood.get('mood_description','–') }}</div>
     </div>
     <div class="stat" style="--sc:var(--green)">
@@ -62,7 +62,8 @@
     </div>
     <div class="stat" style="--sc:var(--teal)">
       <div class="stat-lbl">Top Word</div>
-      <div class="stat-val" style="font-size:1.1rem;text-transform:lowercase;">{{ nlp_summary.get('top_word','–') }}</div>
+      <div class="stat-val" style="font-size:1.1rem;text-transform:lowercase;">{{ nlp_summary.get('top_word','–') }}
+      </div>
       <div class="stat-sub">by frequency</div>
     </div>
   </div>
@@ -71,9 +72,8 @@
   <div class="predict-box">
     <div class="predict-lbl">⚡ Live Sentiment Checker — type any message to score it instantly</div>
     <div class="predict-row">
-      <input class="predict-inp" id="predictInput"
-             placeholder="e.g. I love this project! or This meeting is useless..."
-             onkeydown="if(event.key==='Enter') runPredict()"/>
+      <input class="predict-inp" id="predictInput" placeholder="e.g. I love this project! or This meeting is useless..."
+        onkeydown="if(event.key==='Enter') runPredict()" />
       <button class="predict-btn" id="predictBtn" onclick="runPredict()">ANALYSE</button>
     </div>
     <div class="predict-result" id="predictResult">
@@ -86,11 +86,21 @@
   <!-- Monthly + Donut charts -->
   <div class="g2" style="margin-bottom:18px;">
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Monthly Activity</div><div class="card-sub">Messages per month</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Monthly Activity</div>
+          <div class="card-sub">Messages per month</div>
+        </div>
+      </div>
       <div id="ch-monthly"></div>
     </div>
     <div class="card">
-      <div class="card-head"><div><div class="card-title">User Participation</div><div class="card-sub">Share of messages</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">User Participation</div>
+          <div class="card-sub">Share of messages</div>
+        </div>
+      </div>
       <div id="ch-donut"></div>
     </div>
   </div>
@@ -98,7 +108,9 @@
   <!-- Top emojis -->
   {% if top_emojis %}
   <div class="card">
-    <div class="card-head"><div class="card-title">Top Emojis Used</div></div>
+    <div class="card-head">
+      <div class="card-title">Top Emojis Used</div>
+    </div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;padding:14px;">
       {% for emoji, count in top_emojis %}
       <div style="text-align:center;padding:10px 14px;background:var(--bg2);
@@ -116,16 +128,31 @@
 <!-- ══════════════ TAB: ACTIVITY ══════════════════════════════ -->
 <div class="tab-panel" id="tab-activity" style="display:none;">
   <div class="card" style="margin-bottom:18px;">
-    <div class="card-head"><div><div class="card-title">Hourly Activity</div><div class="card-sub">Messages by hour — hover for exact count</div></div></div>
+    <div class="card-head">
+      <div>
+        <div class="card-title">Hourly Activity</div>
+        <div class="card-sub">Messages by hour — hover for exact count</div>
+      </div>
+    </div>
     <div id="ch-hourly"></div>
   </div>
   <div class="g2">
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Day of Week</div><div class="card-sub">Busiest days</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Day of Week</div>
+          <div class="card-sub">Busiest days</div>
+        </div>
+      </div>
       <div id="ch-daily"></div>
     </div>
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Senders Over Time</div><div class="card-sub">Stacked monthly — click legend to filter</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Senders Over Time</div>
+          <div class="card-sub">Stacked monthly — click legend to filter</div>
+        </div>
+      </div>
       <div id="ch-stacked"></div>
     </div>
   </div>
@@ -135,16 +162,31 @@
 <div class="tab-panel" id="tab-sentiment" style="display:none;">
   <div class="g2" style="margin-bottom:18px;">
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Sentiment Distribution</div><div class="card-sub">Overall breakdown</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Sentiment Distribution</div>
+          <div class="card-sub">Overall breakdown</div>
+        </div>
+      </div>
       <div id="ch-sdist"></div>
     </div>
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Sentiment by Sender</div><div class="card-sub">Stacked % per user</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Sentiment by Sender</div>
+          <div class="card-sub">Stacked % per user</div>
+        </div>
+      </div>
       <div id="ch-suser"></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-head"><div><div class="card-title">Sentiment Trend</div><div class="card-sub">Weekly average score — above zero = positive</div></div></div>
+    <div class="card-head">
+      <div>
+        <div class="card-title">Sentiment Trend</div>
+        <div class="card-sub">Weekly average score — above zero = positive</div>
+      </div>
+    </div>
     <div id="ch-strend"></div>
   </div>
 </div><!-- /tab-sentiment -->
@@ -153,16 +195,31 @@
 <div class="tab-panel" id="tab-words" style="display:none;">
   <div class="g2" style="margin-bottom:18px;">
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Top 20 Words</div><div class="card-sub">Excluding stopwords</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Top 20 Words</div>
+          <div class="card-sub">Excluding stopwords</div>
+        </div>
+      </div>
       <div id="ch-words"></div>
     </div>
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Top Bigrams</div><div class="card-sub">Common 2-word phrases</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Top Bigrams</div>
+          <div class="card-sub">Common 2-word phrases</div>
+        </div>
+      </div>
       <div id="ch-bigrams"></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-head"><div><div class="card-title">TF-IDF Signature Keywords</div><div class="card-sub">Each sender's unique vocabulary</div></div></div>
+    <div class="card-head">
+      <div>
+        <div class="card-title">TF-IDF Signature Keywords</div>
+        <div class="card-sub">Each sender's unique vocabulary</div>
+      </div>
+    </div>
     <div id="tfidf-container"></div>
   </div>
 </div><!-- /tab-words -->
@@ -194,22 +251,28 @@
   </div>
   <div class="g2">
     <div class="card">
-      <div class="card-head"><div><div class="card-title">Model Details</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">Model Details</div>
+        </div>
+      </div>
       <div class="card-body">
         <table style="width:100%;font-size:13px;border-collapse:collapse;">
           {% set rows = [
-            ('Best Model',    model_metadata.get('model_name','–')),
-            ('Test Accuracy', (model_metadata.get('accuracy',0)*100)|round(1)|string + '%'),
-            ('F1 Score',      (model_metadata.get('f1_score',0)*100)|round(1)|string + '%'),
-            ('CV Mean',       (model_metadata.get('cross_val_mean',0)*100)|round(1)|string + '%'),
-            ('CV Std',        '± ' + (model_metadata.get('cross_val_std',0)*100)|round(2)|string + '%'),
-            ('Train Samples', model_metadata.get('training_samples',0)|string),
-            ('Test Samples',  model_metadata.get('test_samples',0)|string),
-            ('Trained At',    model_metadata.get('trained_at','–')),
+          ('Best Model', model_metadata.get('model_name','–')),
+          ('Test Accuracy', (model_metadata.get('accuracy',0)*100)|round(1)|string + '%'),
+          ('F1 Score', (model_metadata.get('f1_score',0)*100)|round(1)|string + '%'),
+          ('CV Mean', (model_metadata.get('cross_val_mean',0)*100)|round(1)|string + '%'),
+          ('CV Std', '± ' + (model_metadata.get('cross_val_std',0)*100)|round(2)|string + '%'),
+          ('Train Samples', model_metadata.get('training_samples',0)|string),
+          ('Test Samples', model_metadata.get('test_samples',0)|string),
+          ('Trained At', model_metadata.get('trained_at','–')),
           ] %}
           {% for lbl, val in rows %}
           <tr style="border-bottom:1px solid var(--border);">
-            <td style="padding:9px 0;color:var(--text2);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;width:46%;">{{ lbl }}</td>
+            <td
+              style="padding:9px 0;color:var(--text2);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.5px;width:46%;">
+              {{ lbl }}</td>
             <td style="padding:9px 0;color:var(--text0);font-weight:600;">{{ val }}</td>
           </tr>
           {% endfor %}
@@ -226,7 +289,12 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-head"><div><div class="card-title">NB vs Logistic Regression</div><div class="card-sub">Cross-validation fold scores</div></div></div>
+      <div class="card-head">
+        <div>
+          <div class="card-title">NB vs Logistic Regression</div>
+          <div class="card-sub">Cross-validation fold scores</div>
+        </div>
+      </div>
       <div id="ch-modelcmp"></div>
     </div>
   </div>
@@ -240,282 +308,301 @@
 {% endblock %}
 
 {% block extra_js %}
+<script type="application/json" id="chart-data-json">
+{{ chart_data | safe }}
+</script>
 <script>
-/* ── RAW DATA FROM FLASK ─────────────────────────────────────── */
-const CD = {{ chart_data | safe }};
-const SENDER_COLORS = ['#58a6ff','#3fb950','#ffa657','#bc8cff','#f85149','#39d353','#d29922','#e3b341'];
-const SENDERS = (CD.sentiment_by_sender && CD.sentiment_by_sender.senders) || [];
+  /* ── RAW DATA FROM FLASK ─────────────────────────────────────── */
+  const CD = JSON.parse(document.getElementById('chart-data-json').textContent.trim());
+  const SENDER_COLORS = ['#58a6ff', '#3fb950', '#ffa657', '#bc8cff', '#f85149', '#39d353', '#d29922', '#e3b341'];
+  const SENDERS = (CD.sentiment_by_sender && CD.sentiment_by_sender.senders) || [];
 
-/* ── TAB SYSTEM ─────────────────────────────────────────────── */
-let _activeBtn  = 'btn-overview';
-const _rendered = {};
+  /* ── TAB SYSTEM ─────────────────────────────────────────────── */
+  let _activeBtn = 'btn-overview';
+  const _rendered = {};
 
-function switchTab(id) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
-  document.getElementById('tab-' + id).style.display = 'block';
+  function switchTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+    document.getElementById('tab-' + id).style.display = 'block';
 
-  // Reset all buttons
-  ['overview','activity','sentiment','words','model'].forEach(t => {
-    const b = document.getElementById('btn-' + t);
-    if (!b) return;
-    b.style.background  = 'transparent';
-    b.style.color       = 'var(--text1)';
-    b.style.fontWeight  = '500';
-  });
-  // Activate clicked
-  const active = document.getElementById('btn-' + id);
-  if (active) {
-    active.style.background = 'var(--accent)';
-    active.style.color      = '#fff';
-    active.style.fontWeight = '700';
+    // Reset all buttons
+    ['overview', 'activity', 'sentiment', 'words', 'model'].forEach(t => {
+      const b = document.getElementById('btn-' + t);
+      if (!b) return;
+      b.style.background = 'transparent';
+      b.style.color = 'var(--text1)';
+      b.style.fontWeight = '500';
+    });
+    // Activate clicked
+    const active = document.getElementById('btn-' + id);
+    if (active) {
+      active.style.background = 'var(--accent)';
+      active.style.color = '#fff';
+      active.style.fontWeight = '700';
+    }
+    _activeBtn = 'btn-' + id;
+
+    // Lazy render
+    if (!_rendered[id]) {
+      _rendered[id] = true;
+      setTimeout(() => _renderTab(id), 60);
+    }
   }
-  _activeBtn = 'btn-' + id;
 
-  // Lazy render
-  if (!_rendered[id]) {
-    _rendered[id] = true;
-    setTimeout(() => _renderTab(id), 60);
+  /* Re-render all on theme change */
+  window._replotAll = function () {
+    Object.keys(_rendered).forEach(k => delete _rendered[k]);
+    const cur = _activeBtn.replace('btn-', '');
+    _rendered[cur] = true;
+    setTimeout(() => _renderTab(cur), 80);
+  };
+
+  function _renderTab(id) {
+    ({
+      overview: () => { _chMonthly(); _chDonut(); },
+      activity: () => { _chHourly(); _chDaily(); _chStacked(); },
+      sentiment: () => { _chSDist(); _chSUser(); _chSTrend(); },
+      words: () => { _chWords(); _chBigrams(); _chTFIDF(); },
+      model: () => { _chModelCmp(); },
+    }[id] || (() => { }))();
   }
-}
 
-/* Re-render all on theme change */
-window._replotAll = function() {
-  Object.keys(_rendered).forEach(k => delete _rendered[k]);
-  const cur = _activeBtn.replace('btn-','');
-  _rendered[cur] = true;
-  setTimeout(() => _renderTab(cur), 80);
-};
+  /* ── CHART HELPERS ──────────────────────────────────────────── */
+  function _chMonthly() {
+    if (!CD.monthly || !CD.monthly.labels || !CD.monthly.labels.length) return;
+    Plotly.newPlot('ch-monthly', [{
+      x: CD.monthly.labels, y: CD.monthly.values,
+      type: 'scatter', mode: 'lines+markers', fill: 'tozeroy',
+      line: { color: '#58a6ff', width: 2 }, fillcolor: 'rgba(88,166,255,.09)',
+      marker: { color: '#58a6ff', size: 5 },
+      hovertemplate: '%{x}: <b>%{y}</b> messages<extra></extra>',
+    }], { ...baseLayout(265), margin: { t: 12, r: 12, b: 38, l: 48 } }, PLY);
+  }
 
-function _renderTab(id) {
-  ({
-    overview  : () => { _chMonthly(); _chDonut(); },
-    activity  : () => { _chHourly(); _chDaily(); _chStacked(); },
-    sentiment : () => { _chSDist(); _chSUser(); _chSTrend(); },
-    words     : () => { _chWords(); _chBigrams(); _chTFIDF(); },
-    model     : () => { _chModelCmp(); },
-  }[id] || (() => {}))();
-}
+  function _chDonut() {
+    if (!CD.user_msgs || !CD.user_msgs.senders || !CD.user_msgs.senders.length) return;
+    Plotly.newPlot('ch-donut', [{
+      values: CD.user_msgs.counts, labels: CD.user_msgs.senders,
+      type: 'pie', hole: .58, marker: { colors: SENDER_COLORS },
+      textinfo: 'none',
+      hovertemplate: '<b>%{label}</b><br>%{value} msgs (%{percent})<extra></extra>',
+    }], {
+      ...baseLayout(265), showlegend: true,
+      legend: { font: { size: 10, family: "'Space Mono',monospace" }, bgcolor: 'transparent', orientation: 'v', x: 1.02, y: .5 },
+      margin: { t: 12, r: 110, b: 12, l: 12 },
+    }, PLY);
+  }
 
-/* ── CHART HELPERS ──────────────────────────────────────────── */
-function _chMonthly() {
-  if (!CD.monthly || !CD.monthly.labels || !CD.monthly.labels.length) return;
-  Plotly.newPlot('ch-monthly', [{
-    x:CD.monthly.labels, y:CD.monthly.values,
-    type:'scatter', mode:'lines+markers', fill:'tozeroy',
-    line:{color:'#58a6ff',width:2}, fillcolor:'rgba(88,166,255,.09)',
-    marker:{color:'#58a6ff',size:5},
-    hovertemplate:'%{x}: <b>%{y}</b> messages<extra></extra>',
-  }], {...baseLayout(265), margin:{t:12,r:12,b:38,l:48}}, PLY);
-}
+  function _chHourly() {
+    if (!CD.hourly || !CD.hourly.length) return;
+    const hrs = Array.from({ length: 24 }, (_, i) => i);
+    const mx = Math.max(...CD.hourly);
+    Plotly.newPlot('ch-hourly', [{
+      x: hrs, y: CD.hourly, type: 'bar',
+      marker: { color: CD.hourly.map(v => `rgba(88,166,255,${.2 + v / mx * .8})`) },
+      hovertemplate: '%{x}:00 → <b>%{y}</b> messages<extra></extra>',
+    }], {
+      ...baseLayout(290),
+      xaxis: {
+        ...baseLayout().xaxis, tickvals: [0, 3, 6, 9, 12, 15, 18, 21],
+        ticktext: ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm']
+      },
+      margin: { t: 12, r: 12, b: 42, l: 48 },
+    }, PLY);
+  }
 
-function _chDonut() {
-  if (!CD.user_msgs || !CD.user_msgs.senders || !CD.user_msgs.senders.length) return;
-  Plotly.newPlot('ch-donut', [{
-    values:CD.user_msgs.counts, labels:CD.user_msgs.senders,
-    type:'pie', hole:.58, marker:{colors:SENDER_COLORS},
-    textinfo:'none',
-    hovertemplate:'<b>%{label}</b><br>%{value} msgs (%{percent})<extra></extra>',
-  }], {
-    ...baseLayout(265), showlegend:true,
-    legend:{font:{size:10,family:"'Space Mono',monospace"},bgcolor:'transparent',orientation:'v',x:1.02,y:.5},
-    margin:{t:12,r:110,b:12,l:12},
-  }, PLY);
-}
+  function _chDaily() {
+    if (!CD.daily || !CD.daily.labels || !CD.daily.labels.length) return;
+    Plotly.newPlot('ch-daily', [{
+      x: CD.daily.labels, y: CD.daily.values, type: 'bar',
+      marker: { color: '#58a6ff', opacity: .85 },
+      hovertemplate: '%{x}: <b>%{y}</b> messages<extra></extra>',
+    }], { ...baseLayout(265), margin: { t: 12, r: 12, b: 38, l: 48 } }, PLY);
+  }
 
-function _chHourly() {
-  if (!CD.hourly || !CD.hourly.length) return;
-  const hrs = Array.from({length:24},(_,i)=>i);
-  const mx  = Math.max(...CD.hourly);
-  Plotly.newPlot('ch-hourly', [{
-    x:hrs, y:CD.hourly, type:'bar',
-    marker:{color:CD.hourly.map(v=>`rgba(88,166,255,${.2 + v/mx*.8})`)},
-    hovertemplate:'%{x}:00 → <b>%{y}</b> messages<extra></extra>',
-  }], {
-    ...baseLayout(290),
-    xaxis:{...baseLayout().xaxis,tickvals:[0,3,6,9,12,15,18,21],
-           ticktext:['12am','3am','6am','9am','12pm','3pm','6pm','9pm']},
-    margin:{t:12,r:12,b:42,l:48},
-  }, PLY);
-}
+  function _chStacked() {
+    if (!SENDERS.length || !CD.monthly || !CD.monthly.labels) return;
+    const total = (CD.user_msgs.counts || []).reduce((a, b) => a + b, 1);
+    const traces = SENDERS.map((s, i) => ({
+      name: s, x: CD.monthly.labels,
+      y: CD.monthly.values.map(v => Math.round(v * ((CD.user_msgs.counts || [])[i] || 0) / total)),
+      type: 'bar', marker: { color: SENDER_COLORS[i] },
+      hovertemplate: `<b>${s}</b> %{x}: %{y} msgs<extra></extra>`,
+    }));
+    Plotly.newPlot('ch-stacked', traces, {
+      ...baseLayout(265), barmode: 'stack', showlegend: true,
+      legend: { font: { size: 10, family: "'Space Mono',monospace" }, bgcolor: 'transparent', orientation: 'h', y: -0.28 },
+      margin: { t: 12, r: 12, b: 62, l: 48 },
+    }, PLY);
+  }
 
-function _chDaily() {
-  if (!CD.daily || !CD.daily.labels || !CD.daily.labels.length) return;
-  Plotly.newPlot('ch-daily', [{
-    x:CD.daily.labels, y:CD.daily.values, type:'bar',
-    marker:{color:'#58a6ff',opacity:.85},
-    hovertemplate:'%{x}: <b>%{y}</b> messages<extra></extra>',
-  }], {...baseLayout(265), margin:{t:12,r:12,b:38,l:48}}, PLY);
-}
+  function _chSDist() {
+    if (!CD.sentiment_dist) return;
+    Plotly.newPlot('ch-sdist', [{
+      values: CD.sentiment_dist.values, labels: CD.sentiment_dist.labels,
+      type: 'pie', hole: .55,
+      marker: { colors: ['#3fb950', '#d29922', '#f85149'] }, textinfo: 'none',
+      hovertemplate: '<b>%{label}</b>: %{value}% (%{percent})<extra></extra>',
+    }], {
+      ...baseLayout(285), showlegend: true,
+      legend: { font: { size: 10, family: "'Space Mono',monospace" }, bgcolor: 'transparent', orientation: 'h', y: -0.1 },
+      margin: { t: 12, r: 12, b: 45, l: 12 },
+    }, PLY);
+  }
 
-function _chStacked() {
-  if (!SENDERS.length || !CD.monthly || !CD.monthly.labels) return;
-  const total = (CD.user_msgs.counts||[]).reduce((a,b)=>a+b,1);
-  const traces = SENDERS.map((s,i) => ({
-    name:s, x:CD.monthly.labels,
-    y:CD.monthly.values.map(v => Math.round(v * ((CD.user_msgs.counts||[])[i]||0) / total)),
-    type:'bar', marker:{color:SENDER_COLORS[i]},
-    hovertemplate:`<b>${s}</b> %{x}: %{y} msgs<extra></extra>`,
-  }));
-  Plotly.newPlot('ch-stacked', traces, {
-    ...baseLayout(265), barmode:'stack', showlegend:true,
-    legend:{font:{size:10,family:"'Space Mono',monospace"},bgcolor:'transparent',orientation:'h',y:-0.28},
-    margin:{t:12,r:12,b:62,l:48},
-  }, PLY);
-}
+  function _chSUser() {
+    if (!CD.sentiment_by_sender || !SENDERS.length) return;
+    const sb = CD.sentiment_by_sender;
+    Plotly.newPlot('ch-suser', [
+      {
+        name: 'Positive', x: SENDERS, y: sb.positive, type: 'bar', marker: { color: '#3fb950' },
+        hovertemplate: '%{x} Positive: <b>%{y}%</b><extra></extra>'
+      },
+      {
+        name: 'Neutral', x: SENDERS, y: sb.neutral, type: 'bar', marker: { color: '#d29922' },
+        hovertemplate: '%{x} Neutral: <b>%{y}%</b><extra></extra>'
+      },
+      {
+        name: 'Negative', x: SENDERS, y: sb.negative, type: 'bar', marker: { color: '#f85149' },
+        hovertemplate: '%{x} Negative: <b>%{y}%</b><extra></extra>'
+      },
+    ], {
+      ...baseLayout(285), barmode: 'stack', showlegend: true,
+      legend: { font: { size: 10, family: "'Space Mono',monospace" }, bgcolor: 'transparent', orientation: 'h', y: -0.28 },
+      margin: { t: 12, r: 12, b: 62, l: 44 },
+    }, PLY);
+  }
 
-function _chSDist() {
-  if (!CD.sentiment_dist) return;
-  Plotly.newPlot('ch-sdist', [{
-    values:CD.sentiment_dist.values, labels:CD.sentiment_dist.labels,
-    type:'pie', hole:.55,
-    marker:{colors:['#3fb950','#d29922','#f85149']}, textinfo:'none',
-    hovertemplate:'<b>%{label}</b>: %{value}% (%{percent})<extra></extra>',
-  }], {
-    ...baseLayout(285), showlegend:true,
-    legend:{font:{size:10,family:"'Space Mono',monospace"},bgcolor:'transparent',orientation:'h',y:-0.1},
-    margin:{t:12,r:12,b:45,l:12},
-  }, PLY);
-}
+  function _chSTrend() {
+    if (!CD.sentiment_trend || !CD.sentiment_trend.dates || !CD.sentiment_trend.dates.length) return;
+    const zeros = Array(CD.sentiment_trend.dates.length).fill(0);
+    Plotly.newPlot('ch-strend', [
+      {
+        x: CD.sentiment_trend.dates, y: CD.sentiment_trend.scores,
+        type: 'scatter', mode: 'lines+markers', fill: 'tozeroy',
+        line: { color: '#3fb950', width: 2 }, fillcolor: 'rgba(63,185,80,.08)',
+        marker: { color: '#3fb950', size: 4 },
+        hovertemplate: '%{x}: <b>%{y:.3f}</b> avg score<extra></extra>'
+      },
+      {
+        x: CD.sentiment_trend.dates, y: zeros,
+        type: 'scatter', mode: 'lines',
+        line: { color: '#f85149', width: 1, dash: 'dot' },
+        hoverinfo: 'none', showlegend: false
+      },
+    ], {
+      ...baseLayout(265),
+      yaxis: { ...baseLayout().yaxis, title: { text: 'Avg Score', font: { size: 10 } } },
+      margin: { t: 12, r: 12, b: 42, l: 58 },
+    }, PLY);
+  }
 
-function _chSUser() {
-  if (!CD.sentiment_by_sender || !SENDERS.length) return;
-  const sb = CD.sentiment_by_sender;
-  Plotly.newPlot('ch-suser', [
-    {name:'Positive', x:SENDERS, y:sb.positive, type:'bar', marker:{color:'#3fb950'},
-     hovertemplate:'%{x} Positive: <b>%{y}%</b><extra></extra>'},
-    {name:'Neutral',  x:SENDERS, y:sb.neutral,  type:'bar', marker:{color:'#d29922'},
-     hovertemplate:'%{x} Neutral: <b>%{y}%</b><extra></extra>'},
-    {name:'Negative', x:SENDERS, y:sb.negative, type:'bar', marker:{color:'#f85149'},
-     hovertemplate:'%{x} Negative: <b>%{y}%</b><extra></extra>'},
-  ], {
-    ...baseLayout(285), barmode:'stack', showlegend:true,
-    legend:{font:{size:10,family:"'Space Mono',monospace"},bgcolor:'transparent',orientation:'h',y:-0.28},
-    margin:{t:12,r:12,b:62,l:44},
-  }, PLY);
-}
+  function _chWords() {
+    if (!CD.top_words || !CD.top_words.words || !CD.top_words.words.length) return;
+    const words = [...CD.top_words.words].reverse();
+    const counts = [...CD.top_words.counts].reverse();
+    const mx = Math.max(...counts);
+    Plotly.newPlot('ch-words', [{
+      x: counts, y: words, type: 'bar', orientation: 'h',
+      marker: { color: counts.map(v => `rgba(88,166,255,${.25 + v / mx * .75})`) },
+      hovertemplate: '<b>%{y}</b>: %{x} times<extra></extra>',
+    }], { ...baseLayout(430), margin: { t: 12, r: 16, b: 38, l: 85 } }, PLY);
+  }
 
-function _chSTrend() {
-  if (!CD.sentiment_trend || !CD.sentiment_trend.dates || !CD.sentiment_trend.dates.length) return;
-  const zeros = Array(CD.sentiment_trend.dates.length).fill(0);
-  Plotly.newPlot('ch-strend', [
-    {x:CD.sentiment_trend.dates, y:CD.sentiment_trend.scores,
-     type:'scatter', mode:'lines+markers', fill:'tozeroy',
-     line:{color:'#3fb950',width:2}, fillcolor:'rgba(63,185,80,.08)',
-     marker:{color:'#3fb950',size:4},
-     hovertemplate:'%{x}: <b>%{y:.3f}</b> avg score<extra></extra>'},
-    {x:CD.sentiment_trend.dates, y:zeros,
-     type:'scatter', mode:'lines',
-     line:{color:'#f85149',width:1,dash:'dot'},
-     hoverinfo:'none', showlegend:false},
-  ], {
-    ...baseLayout(265),
-    yaxis:{...baseLayout().yaxis, title:{text:'Avg Score',font:{size:10}}},
-    margin:{t:12,r:12,b:42,l:58},
-  }, PLY);
-}
+  function _chBigrams() {
+    if (!CD.bigrams || !CD.bigrams.phrases || !CD.bigrams.phrases.length) return;
+    const phrases = [...CD.bigrams.phrases].reverse();
+    const counts = [...CD.bigrams.counts].reverse();
+    Plotly.newPlot('ch-bigrams', [{
+      x: counts, y: phrases, type: 'bar', orientation: 'h',
+      marker: { color: '#bc8cff', opacity: .8 },
+      hovertemplate: '<b>"%{y}"</b>: %{x} times<extra></extra>',
+    }], { ...baseLayout(365), margin: { t: 12, r: 16, b: 38, l: 125 } }, PLY);
+  }
 
-function _chWords() {
-  if (!CD.top_words || !CD.top_words.words || !CD.top_words.words.length) return;
-  const words  = [...CD.top_words.words].reverse();
-  const counts = [...CD.top_words.counts].reverse();
-  const mx = Math.max(...counts);
-  Plotly.newPlot('ch-words', [{
-    x:counts, y:words, type:'bar', orientation:'h',
-    marker:{color:counts.map(v=>`rgba(88,166,255,${.25+v/mx*.75})`)},
-    hovertemplate:'<b>%{y}</b>: %{x} times<extra></extra>',
-  }], {...baseLayout(430), margin:{t:12,r:16,b:38,l:85}}, PLY);
-}
-
-function _chBigrams() {
-  if (!CD.bigrams || !CD.bigrams.phrases || !CD.bigrams.phrases.length) return;
-  const phrases = [...CD.bigrams.phrases].reverse();
-  const counts  = [...CD.bigrams.counts].reverse();
-  Plotly.newPlot('ch-bigrams', [{
-    x:counts, y:phrases, type:'bar', orientation:'h',
-    marker:{color:'#bc8cff',opacity:.8},
-    hovertemplate:'<b>"%{y}"</b>: %{x} times<extra></extra>',
-  }], {...baseLayout(365), margin:{t:12,r:16,b:38,l:125}}, PLY);
-}
-
-function _chTFIDF() {
-  const c = document.getElementById('tfidf-container');
-  if (!c || !CD.tfidf) return;
-  let html = '';
-  Object.entries(CD.tfidf).forEach(([sender, words], i) => {
-    const col = SENDER_COLORS[i % SENDER_COLORS.length];
-    html += `<div style="padding:13px 16px;border-bottom:1px solid var(--border);">
+  function _chTFIDF() {
+    const c = document.getElementById('tfidf-container');
+    if (!c || !CD.tfidf) return;
+    let html = '';
+    Object.entries(CD.tfidf).forEach(([sender, words], i) => {
+      const col = SENDER_COLORS[i % SENDER_COLORS.length];
+      html += `<div style="padding:13px 16px;border-bottom:1px solid var(--border);">
       <div style="font-family:var(--font-mono);font-size:11px;color:${col};
                   margin-bottom:9px;text-transform:uppercase;letter-spacing:.8px;">◈ ${sender}</div>
       <div>`;
-    words.forEach(w => { html += `<span class="chip">${w}</span>`; });
-    html += '</div></div>';
-  });
-  c.innerHTML = html || '<div style="padding:16px;color:var(--text2);font-size:12px;font-family:var(--font-mono);">No keyword data.</div>';
-}
-
-function _chModelCmp() {
-  const meta = CD.model;
-  if (!meta) return;
-  const folds = ['Fold 1','Fold 2','Fold 3','Fold 4','Fold 5'];
-  const std   = meta.cv_std || 0.02;
-  const lrCV  = folds.map((_,i) => parseFloat((meta.cv_mean*100 + (i%2===0?1:-1)*std*100*(0.6+i*.1)).toFixed(1)));
-  const nbCV  = lrCV.map(v => parseFloat((v - 4.5 - Math.random()*2).toFixed(1)));
-  Plotly.newPlot('ch-modelcmp', [
-    {name:'Naive Bayes',    x:folds, y:nbCV, type:'scatter', mode:'lines+markers',
-     line:{color:'#ffa657'}, marker:{color:'#ffa657',size:7},
-     hovertemplate:'NB %{x}: <b>%{y:.1f}%</b><extra></extra>'},
-    {name:'Logistic Reg.',  x:folds, y:lrCV, type:'scatter', mode:'lines+markers',
-     line:{color:'#58a6ff'}, marker:{color:'#58a6ff',size:7},
-     hovertemplate:'LR %{x}: <b>%{y:.1f}%</b><extra></extra>'},
-  ], {
-    ...baseLayout(300), showlegend:true,
-    legend:{font:{size:10,family:"'Space Mono',monospace"},bgcolor:'transparent'},
-    yaxis:{...baseLayout().yaxis, title:{text:'Accuracy %',font:{size:10}}},
-    margin:{t:12,r:12,b:38,l:52},
-  }, PLY);
-}
-
-/* ── LIVE SENTIMENT PREDICT ─────────────────────────────────── */
-async function runPredict() {
-  const text    = document.getElementById('predictInput').value.trim();
-  const resDiv  = document.getElementById('predictResult');
-  const errDiv  = document.getElementById('predictErr');
-  const btn     = document.getElementById('predictBtn');
-  if (!text) return;
-  btn.textContent = '...'; btn.disabled = true;
-  resDiv.classList.remove('show');
-  errDiv.style.display = 'none';
-  try {
-    const resp = await fetch('/predict', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({text}),
+      words.forEach(w => { html += `<span class="chip">${w}</span>`; });
+      html += '</div></div>';
     });
-    const data = await resp.json();
-    if (!data.success) {
-      errDiv.textContent    = data.error || 'Prediction failed.';
-      errDiv.style.display  = 'block';
-      return;
-    }
-    document.getElementById('resLabel').textContent = data.label;
-    document.getElementById('resLabel').className   = 'res-badge ' + data.label;
-    const BAR_COLORS = {Positive:'#3fb950', Neutral:'#d29922', Negative:'#f85149'};
-    document.getElementById('resBars').innerHTML = Object.entries(data.probabilities)
-      .map(([cls,p]) => `
+    c.innerHTML = html || '<div style="padding:16px;color:var(--text2);font-size:12px;font-family:var(--font-mono);">No keyword data.</div>';
+  }
+
+  function _chModelCmp() {
+    const meta = CD.model;
+    if (!meta) return;
+    const folds = ['Fold 1', 'Fold 2', 'Fold 3', 'Fold 4', 'Fold 5'];
+    const std = meta.cv_std || 0.02;
+    const lrCV = folds.map((_, i) => parseFloat((meta.cv_mean * 100 + (i % 2 === 0 ? 1 : -1) * std * 100 * (0.6 + i * .1)).toFixed(1)));
+    const nbCV = lrCV.map(v => parseFloat((v - 4.5 - Math.random() * 2).toFixed(1)));
+    Plotly.newPlot('ch-modelcmp', [
+      {
+        name: 'Naive Bayes', x: folds, y: nbCV, type: 'scatter', mode: 'lines+markers',
+        line: { color: '#ffa657' }, marker: { color: '#ffa657', size: 7 },
+        hovertemplate: 'NB %{x}: <b>%{y:.1f}%</b><extra></extra>'
+      },
+      {
+        name: 'Logistic Reg.', x: folds, y: lrCV, type: 'scatter', mode: 'lines+markers',
+        line: { color: '#58a6ff' }, marker: { color: '#58a6ff', size: 7 },
+        hovertemplate: 'LR %{x}: <b>%{y:.1f}%</b><extra></extra>'
+      },
+    ], {
+      ...baseLayout(300), showlegend: true,
+      legend: { font: { size: 10, family: "'Space Mono',monospace" }, bgcolor: 'transparent' },
+      yaxis: { ...baseLayout().yaxis, title: { text: 'Accuracy %', font: { size: 10 } } },
+      margin: { t: 12, r: 12, b: 38, l: 52 },
+    }, PLY);
+  }
+
+  /* ── LIVE SENTIMENT PREDICT ─────────────────────────────────── */
+  async function runPredict() {
+    const text = document.getElementById('predictInput').value.trim();
+    const resDiv = document.getElementById('predictResult');
+    const errDiv = document.getElementById('predictErr');
+    const btn = document.getElementById('predictBtn');
+    if (!text) return;
+    btn.textContent = '...'; btn.disabled = true;
+    resDiv.classList.remove('show');
+    errDiv.style.display = 'none';
+    try {
+      const resp = await fetch('/predict', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      const data = await resp.json();
+      if (!data.success) {
+        errDiv.textContent = data.error || 'Prediction failed.';
+        errDiv.style.display = 'block';
+        return;
+      }
+      document.getElementById('resLabel').textContent = data.label;
+      document.getElementById('resLabel').className = 'res-badge ' + data.label;
+      const BAR_COLORS = { Positive: '#3fb950', Neutral: '#d29922', Negative: '#f85149' };
+      document.getElementById('resBars').innerHTML = Object.entries(data.probabilities)
+        .map(([cls, p]) => `
         <div class="res-row">
           <span class="res-lbl">${cls}</span>
-          <div class="res-track"><div class="res-fill" style="width:${(p*100).toFixed(1)}%;background:${BAR_COLORS[cls]};"></div></div>
-          <span class="res-pct">${(p*100).toFixed(1)}%</span>
+          <div class="res-track"><div class="res-fill" style="width:${(p * 100).toFixed(1)}%;background:${BAR_COLORS[cls]};"></div></div>
+          <span class="res-pct">${(p * 100).toFixed(1)}%</span>
         </div>`).join('');
-    resDiv.classList.add('show');
-  } catch(e) {
-    errDiv.textContent   = 'Could not reach server. Is Flask running?';
-    errDiv.style.display = 'block';
-  } finally {
-    btn.textContent = 'ANALYSE'; btn.disabled = false;
+      resDiv.classList.add('show');
+    } catch (e) {
+      errDiv.textContent = 'Could not reach server. Is Flask running?';
+      errDiv.style.display = 'block';
+    } finally {
+      btn.textContent = 'ANALYSE'; btn.disabled = false;
+    }
   }
-}
 
-/* ── INIT ────────────────────────────────────────────────────── */
-switchTab('overview');
+  /* ── INIT ────────────────────────────────────────────────────── */
+  switchTab('overview');
 </script>
 {% endblock %}

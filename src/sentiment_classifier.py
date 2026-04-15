@@ -252,7 +252,6 @@ def _build_pipelines() -> dict:
                 random_state=RANDOM_STATE,
                 class_weight='balanced',
                 solver='lbfgs',
-                multi_class='multinomial',
             )),
         ]),
     }
@@ -304,10 +303,11 @@ def _train_and_evaluate(
         # Metrics
         accuracy = round(accuracy_score(y_test, y_pred), 4)
         f1       = round(f1_score(y_test, y_pred, average='weighted'), 4)
-        report   = classification_report(y_test, y_pred,
-                                         target_names=['Negative', 'Neutral', 'Positive'])
-        cm       = confusion_matrix(y_test, y_pred,
-                                    labels=['Negative', 'Neutral', 'Positive'])
+        
+        # Get unique classes from test data
+        unique_classes = sorted(set(y_test))
+        report   = classification_report(y_test, y_pred, target_names=unique_classes)
+        cm       = confusion_matrix(y_test, y_pred, labels=unique_classes)
 
         # 5-Fold Cross Validation on full dataset
         # This gives a more honest estimate than a single train/test split
@@ -347,7 +347,7 @@ def _train_and_evaluate(
         cross_val_std    = round(float(r['cv_scores'].std()), 4),
         training_samples = len(X_train),
         test_samples     = len(X_test),
-        classes          = ['Negative', 'Neutral', 'Positive'],
+        classes          = unique_classes,
         trained_at       = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     )
 
@@ -530,6 +530,11 @@ def predict_sentiment(text: str) -> dict:
         cls: round(float(prob), 4)
         for cls, prob in zip(classes, proba)
     }
+
+    # Ensure all three classes are present (for UI compatibility)
+    for cls in ['Positive', 'Neutral', 'Negative']:
+        if cls not in probabilities:
+            probabilities[cls] = 0.0
 
     confidence = round(float(max(proba)), 4)
 
