@@ -1,0 +1,1439 @@
+2026-04-10 18:51:08 | INFO     | =======================================================
+2026-04-10 18:51:08 | INFO     |  WhatsApp NLP Analysis System ï¿½ Starting up
+2026-04-10 18:51:08 | INFO     | =======================================================
+2026-04-10 18:51:08 | INFO     |  URL      : http://localhost:5000
+2026-04-10 18:51:08 | INFO     |  Debug    : True
+2026-04-10 18:51:08 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-10 18:51:08 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-10 18:51:08 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-10 18:51:08 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-10 18:51:08 | INFO     | =======================================================
+2026-04-10 18:51:08 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.111:5000
+2026-04-10 18:51:08 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-10 18:51:08 | INFO     |  * Restarting with stat
+2026-04-10 18:51:23 | INFO     | =======================================================
+2026-04-10 18:51:23 | INFO     |  WhatsApp NLP Analysis System ï¿½ Starting up
+2026-04-10 18:51:23 | INFO     | =======================================================
+2026-04-10 18:51:23 | INFO     |  URL      : http://localhost:5000
+2026-04-10 18:51:23 | INFO     |  Debug    : True
+2026-04-10 18:51:23 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-10 18:51:23 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-10 18:51:23 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-10 18:51:23 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-10 18:51:23 | INFO     | =======================================================
+2026-04-10 18:51:23 | WARNING  |  * Debugger is active!
+2026-04-10 18:51:23 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-10 18:51:23 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:51:23] "GET / HTTP/1.1" 200 -
+2026-04-10 18:51:23 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:51:23] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-10 18:51:23 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:51:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-10 18:51:37 | INFO     | Upload request received
+2026-04-10 18:51:37 | INFO     | File saved: C:\Users\Public\whatsapp-analyzer\uploads\20260410_185137_whatsapp-chat-data.txt
+2026-04-10 18:51:37 | INFO     | Starting pipeline...
+2026-04-10 18:51:37 | INFO     | ==================================================
+2026-04-10 18:51:37 | INFO     | WHATSAPP NLP ANALYSIS PIPELINE STARTED
+2026-04-10 18:51:37 | INFO     | File      : C:\Users\Public\whatsapp-analyzer\uploads\20260410_185137_whatsapp-chat-data.txt
+2026-04-10 18:51:37 | INFO     | Timestamp : 2026-04-10 18:51:37
+2026-04-10 18:51:37 | INFO     | ==================================================
+2026-04-10 18:51:37 | INFO     | STEP 1/7 ï¿½ Parsing chat file...
+2026-04-10 18:51:37 | INFO     | Reading file: C:\Users\Public\whatsapp-analyzer\uploads\20260410_185137_whatsapp-chat-data.txt
+2026-04-10 18:51:37 | INFO     | Detected format pattern with 30 matches in sample.
+2026-04-10 18:51:38 | INFO     | Found 13655 raw message blocks.
+2026-04-10 18:51:38 | INFO     | Successfully parsed 13379 messages from 154 senders.
+2026-04-10 18:51:38 | INFO     | STEP 2/7 ï¿½ Cleaning and processing...
+2026-04-10 18:51:38 | INFO     | Starting data processing pipeline...
+2026-04-10 18:51:38 | INFO     | Input: 13379 messages
+2026-04-10 18:51:38 | INFO     | Step 1/3 ï¿½ Extracting emojis...
+2026-04-10 18:51:38 | INFO     | Step 2/3 ï¿½ Detecting URLs...
+2026-04-10 18:51:38 | INFO     | Step 3/3 ï¿½ Cleaning message text...
+2026-04-10 18:51:42 | INFO     | Data processing complete!
+2026-04-10 18:51:42 | INFO     |   Total messages         : 13379
+2026-04-10 18:51:42 | INFO     |   Messages with text     : 9669
+2026-04-10 18:51:42 | INFO     |   Messages with emojis   : 1858 (2247 total emojis)
+2026-04-10 18:51:42 | INFO     |   Messages with URLs     : 575
+2026-04-10 18:51:42 | INFO     |   Mode: FULL ï¿½ training ML model from scratch
+2026-04-10 18:51:42 | INFO     | STEP 3/7 ï¿½ NLP feature extraction...
+2026-04-10 18:51:42 | INFO     | Starting NLP processing pipeline...
+2026-04-10 18:51:42 | INFO     | Input: 13379 messages from 154 senders
+2026-04-10 18:51:42 | INFO     | Step 1/6 ï¿½ Computing word frequencies...
+2026-04-10 18:51:42 | INFO     |   Word frequency: 6564 unique words found.
+2026-04-10 18:51:42 | INFO     | Step 2/6 ï¿½ Extracting bigrams and trigrams...
+2026-04-10 18:51:42 | INFO     |   2-grams: 30563 unique 2-grams found.
+2026-04-10 18:51:42 | INFO     |   3-grams: 29091 unique 3-grams found.
+2026-04-10 18:51:42 | INFO     | Step 3/6 ï¿½ Computing TF-IDF keywords per sender...
+2026-04-10 18:51:42 | INFO     |   TF-IDF keywords extracted for 137 senders.
+2026-04-10 18:51:42 | INFO     | Step 4/6 ï¿½ Computing per-user statistics...
+2026-04-10 18:51:43 | INFO     |   User stats computed for 154 senders.
+2026-04-10 18:51:43 | INFO     | Step 5/6 ï¿½ Analysing activity patterns...
+2026-04-10 18:51:43 | INFO     |   Activity patterns computed (hour / day / month / date).
+2026-04-10 18:51:43 | INFO     | Step 6/6 ï¿½ Computing response times...
+2026-04-10 18:51:45 | INFO     |   Response times computed for 145 senders.
+2026-04-10 18:51:45 | INFO     | NLP processing complete!
+2026-04-10 18:51:45 | INFO     |   Total words     : 50,960
+2026-04-10 18:51:45 | INFO     |   Unique words    : 6,564
+2026-04-10 18:51:45 | INFO     |   Bigrams found   : 30,563
+2026-04-10 18:51:45 | INFO     |   Trigrams found  : 29,091
+2026-04-10 18:51:45 | INFO     |   Senders         : 154
+2026-04-10 18:51:45 | INFO     |   Peak hour       : 21:00
+2026-04-10 18:51:45 | INFO     |   Most active day : Sunday
+2026-04-10 18:51:45 | INFO     | STEP 4/7 ï¿½ Sentiment analysis (VADER + TextBlob)...
+2026-04-10 18:51:45 | INFO     | Starting sentiment analysis...
+2026-04-10 18:51:45 | INFO     | Input: 13379 messages
+2026-04-10 18:51:45 | INFO     | Running VADER + TextBlob on all messages...
+2026-04-10 18:51:53 | INFO     | Sentiment analysis complete!
+2026-04-10 18:51:53 | INFO     |   Positive  :  3395 (25.4%)
+2026-04-10 18:51:53 | INFO     |   Neutral   :  8792 (65.7%)
+2026-04-10 18:51:53 | INFO     |   Negative  :  1192 (8.9%)
+2026-04-10 18:51:53 | INFO     |   Avg score : 0.0774
+2026-04-10 18:51:53 | INFO     | STEP 5/7 ï¿½ Training ML classifier...
+2026-04-10 18:51:53 | INFO     | Training samples: 462 (2 classes, ~231 each, tier=High)
+2026-04-10 18:51:53 | INFO     | ==================================================
+2026-04-10 18:51:53 | INFO     | Starting ML classifier training...
+2026-04-10 18:51:53 | INFO     | ==================================================
+2026-04-10 18:51:53 | INFO     | Step 1/4 ï¿½ Preparing training data...
+2026-04-10 18:51:53 | INFO     |   Training data prepared: 462 samples
+2026-04-10 18:51:53 | INFO     |     Positive    : 231 (50.0%)
+2026-04-10 18:51:53 | INFO     |     Negative    : 231 (50.0%)
+2026-04-10 18:51:53 | INFO     | Step 2/4 ï¿½ Splitting 80% train / 20% test...
+2026-04-10 18:51:53 | INFO     |   Train: 369 samples | Test: 93 samples
+2026-04-10 18:51:53 | INFO     | Step 3/4 ï¿½ Building model pipelines...
+2026-04-10 18:51:53 | INFO     | Step 4/4 ï¿½ Training and evaluating models...
+2026-04-10 18:51:53 | INFO     |   Training Naive Bayes...
+2026-04-10 18:51:53 | INFO     |     Accuracy : 0.8817
+2026-04-10 18:51:53 | INFO     |     F1 Score : 0.8817
+2026-04-10 18:51:53 | INFO     |     CV Mean  : 0.8698 (+/- 0.0387)
+2026-04-10 18:51:53 | INFO     |   Training Logistic Regression...
+2026-04-10 18:51:53 | INFO     |     Accuracy : 0.8387
+2026-04-10 18:51:53 | INFO     |     F1 Score : 0.8377
+2026-04-10 18:51:53 | INFO     |     CV Mean  : 0.8936 (+/- 0.0434)
+2026-04-10 18:51:53 | INFO     |   Best model: Naive Bayes (F1: 0.8817)
+2026-04-10 18:51:53 | INFO     | ==================================================
+2026-04-10 18:51:53 | INFO     | Training complete!
+2026-04-10 18:51:53 | INFO     |   Best model : Naive Bayes
+2026-04-10 18:51:53 | INFO     |   Accuracy   : 0.8817
+2026-04-10 18:51:53 | INFO     |   F1 Score   : 0.8817
+2026-04-10 18:51:53 | INFO     |   CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-10 18:51:53 | INFO     | ==================================================
+2026-04-10 18:51:53 | INFO     |     Accuracy   : 0.8817 (88.2%)
+2026-04-10 18:51:53 | INFO     |     F1 Score   : 0.8817
+2026-04-10 18:51:53 | INFO     |     CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-10 18:51:53 | INFO     | STEP 5/7 ï¿½ Running ML predictions on full chat...
+2026-04-10 18:51:53 | INFO     | VADER vs ML agreement rate: 31.4%
+2026-04-10 18:51:53 | INFO     | STEP 6/7 ï¿½ Generating charts...
+2026-04-10 18:51:53 | INFO     | Generating all charts...
+2026-04-10 18:51:53 | INFO     | Output directory: results\visualizations
+2026-04-10 18:51:53 | INFO     | Chart 01/10 ï¿½ wordcloud...
+2026-04-10 18:51:55 | INFO     |   Saved: 01_wordcloud.png
+2026-04-10 18:51:55 | INFO     | Chart 02/10 ï¿½ top_words...
+2026-04-10 18:51:55 | INFO     |   Saved: 02_top_words.png
+2026-04-10 18:51:55 | INFO     | Chart 03/10 ï¿½ hourly_activity...
+2026-04-10 18:51:55 | INFO     |   Saved: 03_hourly_activity.png
+2026-04-10 18:51:55 | INFO     | Chart 04/10 ï¿½ daily_activity...
+2026-04-10 18:51:55 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-10 18:51:55 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-10 18:51:55 | INFO     |   Saved: 04_daily_activity.png
+2026-04-10 18:51:55 | INFO     | Chart 05/10 ï¿½ monthly_activity...
+2026-04-10 18:51:56 | INFO     |   Saved: 05_monthly_activity.png
+2026-04-10 18:51:56 | INFO     | Chart 06/10 ï¿½ user_participation...
+2026-04-10 18:51:57 | INFO     |   Saved: 06_user_participation.png
+2026-04-10 18:51:57 | INFO     | Chart 07/10 ï¿½ top_bigrams...
+2026-04-10 18:51:58 | INFO     |   Saved: 07_top_bigrams.png
+2026-04-10 18:51:58 | INFO     | Chart 08/10 ï¿½ sentiment_distribution...
+2026-04-10 18:51:58 | INFO     |   Saved: 08_sentiment_distribution.png
+2026-04-10 18:51:58 | INFO     | Chart 09/10 ï¿½ sentiment_trend...
+2026-04-10 18:51:58 | INFO     |   Saved: 09_sentiment_trend.png
+2026-04-10 18:51:58 | INFO     | Chart 10/10 ï¿½ sentiment_by_user...
+2026-04-10 18:52:01 | INFO     |   Saved: 10_sentiment_by_user.png
+2026-04-10 18:52:01 | INFO     | Chart generation complete: 10/10 charts saved.
+2026-04-10 18:52:01 | INFO     | STEP 7/7 ï¿½ Building dashboard summaries...
+2026-04-10 18:52:02 | INFO     | ==================================================
+2026-04-10 18:52:02 | INFO     | PIPELINE COMPLETED SUCCESSFULLY
+2026-04-10 18:52:02 | INFO     | Mode           : FULL
+2026-04-10 18:52:02 | INFO     | ML Trained     : True
+2026-04-10 18:52:02 | INFO     | Processing Time: 24.21s
+2026-04-10 18:52:02 | INFO     | ==================================================
+2026-04-10 18:52:02 | INFO     | Pipeline complete in 24.21s ï¿½ redirecting to dashboard
+2026-04-10 18:52:02 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:52:02] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-04-10 18:52:02 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:52:02] "GET /dashboard HTTP/1.1" 200 -
+2026-04-10 18:52:02 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:52:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-10 18:52:02 | INFO     | 127.0.0.1 - - [10/Apr/2026 18:52:02] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-10 19:10:43 | INFO     | 127.0.0.1 - - [10/Apr/2026 19:10:43] "GET /status HTTP/1.1" 200 -
+2026-04-10 19:10:57 | INFO     | 127.0.0.1 - - [10/Apr/2026 19:10:57] "GET /dashboard HTTP/1.1" 200 -2026-04-15 13:10:30 | INFO     | =======================================================
+2026-04-15 13:10:30 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 13:10:30 | INFO     | =======================================================
+2026-04-15 13:10:30 | INFO     |  URL      : http://localhost:5000
+2026-04-15 13:10:30 | INFO     |  Debug    : True
+2026-04-15 13:10:30 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 13:10:30 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 13:10:30 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 13:10:30 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 13:10:30 | INFO     | =======================================================
+2026-04-15 13:10:30 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.64.38.174:5000
+2026-04-15 13:10:30 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-15 13:10:30 | INFO     |  * Restarting with stat
+2026-04-15 13:10:34 | INFO     | =======================================================
+2026-04-15 13:10:34 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 13:10:34 | INFO     | =======================================================
+2026-04-15 13:10:34 | INFO     |  URL      : http://localhost:5000
+2026-04-15 13:10:34 | INFO     |  Debug    : True
+2026-04-15 13:10:34 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 13:10:34 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 13:10:34 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 13:10:34 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 13:10:34 | INFO     | =======================================================
+2026-04-15 13:10:34 | WARNING  |  * Debugger is active!
+2026-04-15 13:10:34 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 13:10:38 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:10:38] "GET / HTTP/1.1" 200 -
+2026-04-15 13:10:39 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:10:39] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:10:39 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:10:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:10:39 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:10:39] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-15 13:10:49 | INFO     | Upload request received
+2026-04-15 13:10:49 | INFO     | File saved: C:\Users\Public\whatsapp-analyzer\uploads\20260415_131049_whatsapp-chat-data.txt
+2026-04-15 13:10:49 | INFO     | Starting pipeline...
+2026-04-15 13:10:49 | INFO     | ==================================================
+2026-04-15 13:10:49 | INFO     | WHATSAPP NLP ANALYSIS PIPELINE STARTED
+2026-04-15 13:10:49 | INFO     | File      : C:\Users\Public\whatsapp-analyzer\uploads\20260415_131049_whatsapp-chat-data.txt
+2026-04-15 13:10:49 | INFO     | Timestamp : 2026-04-15 13:10:49
+2026-04-15 13:10:49 | INFO     | ==================================================
+2026-04-15 13:10:49 | INFO     | STEP 1/7 — Parsing chat file...
+2026-04-15 13:10:49 | INFO     | Reading file: C:\Users\Public\whatsapp-analyzer\uploads\20260415_131049_whatsapp-chat-data.txt
+2026-04-15 13:10:49 | INFO     | Detected format pattern with 30 matches in sample.
+2026-04-15 13:10:49 | INFO     | Found 13655 raw message blocks.
+2026-04-15 13:10:49 | INFO     | Successfully parsed 13379 messages from 154 senders.
+2026-04-15 13:10:50 | INFO     | STEP 2/7 — Cleaning and processing...
+2026-04-15 13:10:50 | INFO     | Starting data processing pipeline...
+2026-04-15 13:10:50 | INFO     | Input: 13379 messages
+2026-04-15 13:10:50 | INFO     | Step 1/3 — Extracting emojis...
+2026-04-15 13:10:50 | INFO     | Step 2/3 — Detecting URLs...
+2026-04-15 13:10:50 | INFO     | Step 3/3 — Cleaning message text...
+2026-04-15 13:10:53 | INFO     | Data processing complete!
+2026-04-15 13:10:53 | INFO     |   Total messages         : 13379
+2026-04-15 13:10:53 | INFO     |   Messages with text     : 9669
+2026-04-15 13:10:53 | INFO     |   Messages with emojis   : 1858 (2247 total emojis)
+2026-04-15 13:10:53 | INFO     |   Messages with URLs     : 575
+2026-04-15 13:10:53 | INFO     |   Mode: FULL — training ML model from scratch
+2026-04-15 13:10:53 | INFO     | STEP 3/7 — NLP feature extraction...
+2026-04-15 13:10:53 | INFO     | Starting NLP processing pipeline...
+2026-04-15 13:10:53 | INFO     | Input: 13379 messages from 154 senders
+2026-04-15 13:10:53 | INFO     | Step 1/6 — Computing word frequencies...
+2026-04-15 13:10:53 | INFO     |   Word frequency: 6564 unique words found.
+2026-04-15 13:10:53 | INFO     | Step 2/6 — Extracting bigrams and trigrams...
+2026-04-15 13:10:53 | INFO     |   2-grams: 30563 unique 2-grams found.
+2026-04-15 13:10:53 | INFO     |   3-grams: 29091 unique 3-grams found.
+2026-04-15 13:10:53 | INFO     | Step 3/6 — Computing TF-IDF keywords per sender...
+2026-04-15 13:10:54 | INFO     |   TF-IDF keywords extracted for 137 senders.
+2026-04-15 13:10:54 | INFO     | Step 4/6 — Computing per-user statistics...
+2026-04-15 13:10:54 | INFO     |   User stats computed for 154 senders.
+2026-04-15 13:10:54 | INFO     | Step 5/6 — Analysing activity patterns...
+2026-04-15 13:10:54 | INFO     |   Activity patterns computed (hour / day / month / date).
+2026-04-15 13:10:54 | INFO     | Step 6/6 — Computing response times...
+2026-04-15 13:10:56 | INFO     |   Response times computed for 145 senders.
+2026-04-15 13:10:56 | INFO     | NLP processing complete!
+2026-04-15 13:10:56 | INFO     |   Total words     : 50,960
+2026-04-15 13:10:56 | INFO     |   Unique words    : 6,564
+2026-04-15 13:10:56 | INFO     |   Bigrams found   : 30,563
+2026-04-15 13:10:56 | INFO     |   Trigrams found  : 29,091
+2026-04-15 13:10:56 | INFO     |   Senders         : 154
+2026-04-15 13:10:56 | INFO     |   Peak hour       : 21:00
+2026-04-15 13:10:56 | INFO     |   Most active day : Sunday
+2026-04-15 13:10:56 | INFO     | STEP 4/7 — Sentiment analysis (VADER + TextBlob)...
+2026-04-15 13:10:56 | INFO     | Starting sentiment analysis...
+2026-04-15 13:10:56 | INFO     | Input: 13379 messages
+2026-04-15 13:10:56 | INFO     | Running VADER + TextBlob on all messages...
+2026-04-15 13:11:03 | INFO     | Sentiment analysis complete!
+2026-04-15 13:11:03 | INFO     |   Positive  :  3395 (25.4%)
+2026-04-15 13:11:03 | INFO     |   Neutral   :  8792 (65.7%)
+2026-04-15 13:11:03 | INFO     |   Negative  :  1192 (8.9%)
+2026-04-15 13:11:03 | INFO     |   Avg score : 0.0774
+2026-04-15 13:11:03 | INFO     | STEP 5/7 — Training ML classifier...
+2026-04-15 13:11:03 | INFO     | Training samples: 462 (2 classes, ~231 each, tier=High)
+2026-04-15 13:11:03 | INFO     | ==================================================
+2026-04-15 13:11:03 | INFO     | Starting ML classifier training...
+2026-04-15 13:11:03 | INFO     | ==================================================
+2026-04-15 13:11:03 | INFO     | Step 1/4 — Preparing training data...
+2026-04-15 13:11:03 | INFO     |   Training data prepared: 462 samples
+2026-04-15 13:11:03 | INFO     |     Positive    : 231 (50.0%)
+2026-04-15 13:11:03 | INFO     |     Negative    : 231 (50.0%)
+2026-04-15 13:11:03 | INFO     | Step 2/4 — Splitting 80% train / 20% test...
+2026-04-15 13:11:03 | INFO     |   Train: 369 samples | Test: 93 samples
+2026-04-15 13:11:03 | INFO     | Step 3/4 — Building model pipelines...
+2026-04-15 13:11:03 | INFO     | Step 4/4 — Training and evaluating models...
+2026-04-15 13:11:03 | INFO     |   Training Naive Bayes...
+2026-04-15 13:11:03 | INFO     |     Accuracy : 0.8817
+2026-04-15 13:11:03 | INFO     |     F1 Score : 0.8817
+2026-04-15 13:11:03 | INFO     |     CV Mean  : 0.8698 (+/- 0.0387)
+2026-04-15 13:11:03 | INFO     |   Training Logistic Regression...
+2026-04-15 13:11:04 | INFO     |     Accuracy : 0.8387
+2026-04-15 13:11:04 | INFO     |     F1 Score : 0.8377
+2026-04-15 13:11:04 | INFO     |     CV Mean  : 0.8936 (+/- 0.0434)
+2026-04-15 13:11:04 | INFO     |   Best model: Naive Bayes (F1: 0.8817)
+2026-04-15 13:11:04 | INFO     | ==================================================
+2026-04-15 13:11:04 | INFO     | Training complete!
+2026-04-15 13:11:04 | INFO     |   Best model : Naive Bayes
+2026-04-15 13:11:04 | INFO     |   Accuracy   : 0.8817
+2026-04-15 13:11:04 | INFO     |   F1 Score   : 0.8817
+2026-04-15 13:11:04 | INFO     |   CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-15 13:11:04 | INFO     | ==================================================
+2026-04-15 13:11:04 | INFO     |     Accuracy   : 0.8817 (88.2%)
+2026-04-15 13:11:04 | INFO     |     F1 Score   : 0.8817
+2026-04-15 13:11:04 | INFO     |     CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-15 13:11:04 | INFO     | STEP 5/7 — Running ML predictions on full chat...
+2026-04-15 13:11:04 | INFO     | VADER vs ML agreement rate: 31.4%
+2026-04-15 13:11:04 | INFO     | STEP 6/7 — Generating charts...
+2026-04-15 13:11:04 | INFO     | Generating all charts...
+2026-04-15 13:11:04 | INFO     | Output directory: results\visualizations
+2026-04-15 13:11:04 | INFO     | Chart 01/10 — wordcloud...
+2026-04-15 13:11:05 | INFO     |   Saved: 01_wordcloud.png
+2026-04-15 13:11:05 | INFO     | Chart 02/10 — top_words...
+2026-04-15 13:11:05 | INFO     |   Saved: 02_top_words.png
+2026-04-15 13:11:05 | INFO     | Chart 03/10 — hourly_activity...
+2026-04-15 13:11:06 | INFO     |   Saved: 03_hourly_activity.png
+2026-04-15 13:11:06 | INFO     | Chart 04/10 — daily_activity...
+2026-04-15 13:11:06 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 13:11:06 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 13:11:06 | INFO     |   Saved: 04_daily_activity.png
+2026-04-15 13:11:06 | INFO     | Chart 05/10 — monthly_activity...
+2026-04-15 13:11:06 | INFO     |   Saved: 05_monthly_activity.png
+2026-04-15 13:11:06 | INFO     | Chart 06/10 — user_participation...
+2026-04-15 13:11:08 | INFO     |   Saved: 06_user_participation.png
+2026-04-15 13:11:08 | INFO     | Chart 07/10 — top_bigrams...
+2026-04-15 13:11:08 | INFO     |   Saved: 07_top_bigrams.png
+2026-04-15 13:11:08 | INFO     | Chart 08/10 — sentiment_distribution...
+2026-04-15 13:11:08 | INFO     |   Saved: 08_sentiment_distribution.png
+2026-04-15 13:11:08 | INFO     | Chart 09/10 — sentiment_trend...
+2026-04-15 13:11:09 | INFO     |   Saved: 09_sentiment_trend.png
+2026-04-15 13:11:09 | INFO     | Chart 10/10 — sentiment_by_user...
+2026-04-15 13:11:12 | INFO     |   Saved: 10_sentiment_by_user.png
+2026-04-15 13:11:12 | INFO     | Chart generation complete: 10/10 charts saved.
+2026-04-15 13:11:12 | INFO     | STEP 7/7 — Building dashboard summaries...
+2026-04-15 13:11:12 | INFO     | ==================================================
+2026-04-15 13:11:12 | INFO     | PIPELINE COMPLETED SUCCESSFULLY
+2026-04-15 13:11:12 | INFO     | Mode           : FULL
+2026-04-15 13:11:12 | INFO     | ML Trained     : True
+2026-04-15 13:11:12 | INFO     | Processing Time: 23.22s
+2026-04-15 13:11:12 | INFO     | ==================================================
+2026-04-15 13:11:12 | INFO     | Pipeline complete in 23.22s — redirecting to dashboard
+2026-04-15 13:11:12 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:12] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-04-15 13:11:12 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:12] "GET /dashboard HTTP/1.1" 200 -
+2026-04-15 13:11:12 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:12] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:11:12 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:12] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:11:44 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:44] "GET /results HTTP/1.1" 200 -
+2026-04-15 13:11:44 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:11:44 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:44] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:11:54 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:54] "GET /dashboard HTTP/1.1" 200 -
+2026-04-15 13:11:54 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:11:54 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:11:54] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:12:53 | INFO     | Session 20260415131112681150 cleared from memory store.
+2026-04-15 13:12:53 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:12:53] "[32mGET /reset HTTP/1.1[0m" 302 -
+2026-04-15 13:12:53 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:12:53] "GET / HTTP/1.1" 200 -
+2026-04-15 13:12:53 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:12:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:12:53 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:12:53] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:12:54 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:12:54] "GET /status HTTP/1.1" 200 -
+2026-04-15 13:13:01 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:13:01] "GET / HTTP/1.1" 200 -
+2026-04-15 13:13:03 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:13:03] "GET /status HTTP/1.1" 200 -
+2026-04-15 13:32:53 | INFO     | =======================================================
+2026-04-15 13:32:53 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 13:32:53 | INFO     | =======================================================
+2026-04-15 13:32:53 | INFO     |  URL      : http://localhost:5000
+2026-04-15 13:32:53 | INFO     |  Debug    : True
+2026-04-15 13:32:53 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 13:32:53 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 13:32:53 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 13:32:53 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 13:32:53 | INFO     | =======================================================
+2026-04-15 13:32:53 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.64.38.174:5000
+2026-04-15 13:32:53 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-15 13:32:53 | INFO     |  * Restarting with stat
+2026-04-15 13:32:57 | INFO     | =======================================================
+2026-04-15 13:32:57 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 13:32:57 | INFO     | =======================================================
+2026-04-15 13:32:57 | INFO     |  URL      : http://localhost:5000
+2026-04-15 13:32:57 | INFO     |  Debug    : True
+2026-04-15 13:32:57 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 13:32:57 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 13:32:57 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 13:32:57 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 13:32:57 | INFO     | =======================================================
+2026-04-15 13:32:57 | WARNING  |  * Debugger is active!
+2026-04-15 13:32:57 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 13:33:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:23] "GET / HTTP/1.1" 200 -
+2026-04-15 13:33:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:23] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:33:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:33:32 | INFO     | Upload request received
+2026-04-15 13:33:32 | INFO     | File saved: C:\Users\Public\whatsapp-analyzer\uploads\20260415_133332_whatsapp-chat-data.txt
+2026-04-15 13:33:32 | INFO     | Starting pipeline...
+2026-04-15 13:33:32 | INFO     | ==================================================
+2026-04-15 13:33:32 | INFO     | WHATSAPP NLP ANALYSIS PIPELINE STARTED
+2026-04-15 13:33:32 | INFO     | File      : C:\Users\Public\whatsapp-analyzer\uploads\20260415_133332_whatsapp-chat-data.txt
+2026-04-15 13:33:32 | INFO     | Timestamp : 2026-04-15 13:33:32
+2026-04-15 13:33:32 | INFO     | ==================================================
+2026-04-15 13:33:32 | INFO     | STEP 1/7 — Parsing chat file...
+2026-04-15 13:33:32 | INFO     | Reading file: C:\Users\Public\whatsapp-analyzer\uploads\20260415_133332_whatsapp-chat-data.txt
+2026-04-15 13:33:32 | INFO     | Detected format pattern with 30 matches in sample.
+2026-04-15 13:33:32 | INFO     | Found 13655 raw message blocks.
+2026-04-15 13:33:32 | INFO     | Successfully parsed 13379 messages from 154 senders.
+2026-04-15 13:33:32 | INFO     | STEP 2/7 — Cleaning and processing...
+2026-04-15 13:33:32 | INFO     | Starting data processing pipeline...
+2026-04-15 13:33:32 | INFO     | Input: 13379 messages
+2026-04-15 13:33:32 | INFO     | Step 1/3 — Extracting emojis...
+2026-04-15 13:33:32 | INFO     | Step 2/3 — Detecting URLs...
+2026-04-15 13:33:32 | INFO     | Step 3/3 — Cleaning message text...
+2026-04-15 13:33:36 | INFO     | Data processing complete!
+2026-04-15 13:33:36 | INFO     |   Total messages         : 13379
+2026-04-15 13:33:36 | INFO     |   Messages with text     : 9669
+2026-04-15 13:33:36 | INFO     |   Messages with emojis   : 1858 (2247 total emojis)
+2026-04-15 13:33:36 | INFO     |   Messages with URLs     : 575
+2026-04-15 13:33:36 | INFO     |   Mode: FAST — loading existing trained model
+2026-04-15 13:33:36 | INFO     | STEP 3/7 — NLP feature extraction...
+2026-04-15 13:33:36 | INFO     | Starting NLP processing pipeline...
+2026-04-15 13:33:36 | INFO     | Input: 13379 messages from 154 senders
+2026-04-15 13:33:36 | INFO     | Step 1/6 — Computing word frequencies...
+2026-04-15 13:33:36 | INFO     |   Word frequency: 6564 unique words found.
+2026-04-15 13:33:36 | INFO     | Step 2/6 — Extracting bigrams and trigrams...
+2026-04-15 13:33:36 | INFO     |   2-grams: 30563 unique 2-grams found.
+2026-04-15 13:33:36 | INFO     |   3-grams: 29091 unique 3-grams found.
+2026-04-15 13:33:36 | INFO     | Step 3/6 — Computing TF-IDF keywords per sender...
+2026-04-15 13:33:36 | INFO     |   TF-IDF keywords extracted for 137 senders.
+2026-04-15 13:33:36 | INFO     | Step 4/6 — Computing per-user statistics...
+2026-04-15 13:33:36 | INFO     |   User stats computed for 154 senders.
+2026-04-15 13:33:36 | INFO     | Step 5/6 — Analysing activity patterns...
+2026-04-15 13:33:36 | INFO     |   Activity patterns computed (hour / day / month / date).
+2026-04-15 13:33:36 | INFO     | Step 6/6 — Computing response times...
+2026-04-15 13:33:38 | INFO     |   Response times computed for 145 senders.
+2026-04-15 13:33:39 | INFO     | NLP processing complete!
+2026-04-15 13:33:39 | INFO     |   Total words     : 50,960
+2026-04-15 13:33:39 | INFO     |   Unique words    : 6,564
+2026-04-15 13:33:39 | INFO     |   Bigrams found   : 30,563
+2026-04-15 13:33:39 | INFO     |   Trigrams found  : 29,091
+2026-04-15 13:33:39 | INFO     |   Senders         : 154
+2026-04-15 13:33:39 | INFO     |   Peak hour       : 21:00
+2026-04-15 13:33:39 | INFO     |   Most active day : Sunday
+2026-04-15 13:33:39 | INFO     | STEP 4/7 — Sentiment analysis (VADER + TextBlob)...
+2026-04-15 13:33:39 | INFO     | Starting sentiment analysis...
+2026-04-15 13:33:39 | INFO     | Input: 13379 messages
+2026-04-15 13:33:39 | INFO     | Running VADER + TextBlob on all messages...
+2026-04-15 13:33:46 | INFO     | Sentiment analysis complete!
+2026-04-15 13:33:46 | INFO     |   Positive  :  3395 (25.4%)
+2026-04-15 13:33:46 | INFO     |   Neutral   :  8792 (65.7%)
+2026-04-15 13:33:46 | INFO     |   Negative  :  1192 (8.9%)
+2026-04-15 13:33:46 | INFO     |   Avg score : 0.0774
+2026-04-15 13:33:46 | INFO     | STEP 5/7 — Running ML predictions on full chat...
+2026-04-15 13:33:46 | INFO     | VADER vs ML agreement rate: 31.4%
+2026-04-15 13:33:46 | INFO     | STEP 6/7 — Generating charts...
+2026-04-15 13:33:46 | INFO     | Generating all charts...
+2026-04-15 13:33:46 | INFO     | Output directory: results\visualizations
+2026-04-15 13:33:46 | INFO     | Chart 01/10 — wordcloud...
+2026-04-15 13:33:48 | INFO     |   Saved: 01_wordcloud.png
+2026-04-15 13:33:48 | INFO     | Chart 02/10 — top_words...
+2026-04-15 13:33:48 | INFO     |   Saved: 02_top_words.png
+2026-04-15 13:33:48 | INFO     | Chart 03/10 — hourly_activity...
+2026-04-15 13:33:48 | INFO     |   Saved: 03_hourly_activity.png
+2026-04-15 13:33:48 | INFO     | Chart 04/10 — daily_activity...
+2026-04-15 13:33:48 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 13:33:48 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 13:33:48 | INFO     |   Saved: 04_daily_activity.png
+2026-04-15 13:33:48 | INFO     | Chart 05/10 — monthly_activity...
+2026-04-15 13:33:49 | INFO     |   Saved: 05_monthly_activity.png
+2026-04-15 13:33:49 | INFO     | Chart 06/10 — user_participation...
+2026-04-15 13:33:50 | INFO     |   Saved: 06_user_participation.png
+2026-04-15 13:33:50 | INFO     | Chart 07/10 — top_bigrams...
+2026-04-15 13:33:51 | INFO     |   Saved: 07_top_bigrams.png
+2026-04-15 13:33:51 | INFO     | Chart 08/10 — sentiment_distribution...
+2026-04-15 13:33:51 | INFO     |   Saved: 08_sentiment_distribution.png
+2026-04-15 13:33:51 | INFO     | Chart 09/10 — sentiment_trend...
+2026-04-15 13:33:51 | INFO     |   Saved: 09_sentiment_trend.png
+2026-04-15 13:33:51 | INFO     | Chart 10/10 — sentiment_by_user...
+2026-04-15 13:33:55 | INFO     |   Saved: 10_sentiment_by_user.png
+2026-04-15 13:33:55 | INFO     | Chart generation complete: 10/10 charts saved.
+2026-04-15 13:33:55 | INFO     | STEP 7/7 — Building dashboard summaries...
+2026-04-15 13:33:55 | INFO     | ==================================================
+2026-04-15 13:33:55 | INFO     | PIPELINE COMPLETED SUCCESSFULLY
+2026-04-15 13:33:55 | INFO     | Mode           : FAST
+2026-04-15 13:33:55 | INFO     | ML Trained     : False
+2026-04-15 13:33:55 | INFO     | Processing Time: 22.88s
+2026-04-15 13:33:55 | INFO     | ==================================================
+2026-04-15 13:33:55 | INFO     | Pipeline complete in 22.88s — redirecting to dashboard
+2026-04-15 13:33:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:55] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-04-15 13:33:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:55] "GET /dashboard HTTP/1.1" 200 -
+2026-04-15 13:33:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 13:33:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:33:55] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 13:38:36 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:38:36] "POST /predict HTTP/1.1" 200 -
+2026-04-15 13:38:42 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:38:42] "POST /predict HTTP/1.1" 200 -
+2026-04-15 13:38:47 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:38:47] "POST /predict HTTP/1.1" 200 -
+2026-04-15 13:38:54 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:38:54] "POST /predict HTTP/1.1" 200 -
+2026-04-15 13:39:04 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:39:04] "POST /predict HTTP/1.1" 200 -
+2026-04-15 13:39:10 | INFO     | 127.0.0.1 - - [15/Apr/2026 13:39:10] "POST /predict HTTP/1.1" 200 -
+2026-04-15 14:20:17 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:20:17] "GET /dashboard HTTP/1.1" 200 -
+2026-04-15 14:20:17 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:20:17] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 14:20:17 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:20:17] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 14:42:47 | INFO     | =======================================================
+2026-04-15 14:42:47 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 14:42:47 | INFO     | =======================================================
+2026-04-15 14:42:47 | INFO     |  URL      : http://localhost:5000
+2026-04-15 14:42:47 | INFO     |  Debug    : True
+2026-04-15 14:42:47 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 14:42:47 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 14:42:47 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 14:42:47 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 14:42:47 | INFO     | =======================================================
+2026-04-15 14:42:47 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.64.38.174:5000
+2026-04-15 14:42:47 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-15 14:42:47 | INFO     |  * Restarting with stat
+2026-04-15 14:42:50 | INFO     | =======================================================
+2026-04-15 14:42:50 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 14:42:50 | INFO     | =======================================================
+2026-04-15 14:42:50 | INFO     |  URL      : http://localhost:5000
+2026-04-15 14:42:50 | INFO     |  Debug    : True
+2026-04-15 14:42:50 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 14:42:50 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 14:42:50 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 14:42:50 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 14:42:50 | INFO     | =======================================================
+2026-04-15 14:42:50 | WARNING  |  * Debugger is active!
+2026-04-15 14:42:50 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 14:42:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:42:55] "GET / HTTP/1.1" 200 -
+2026-04-15 14:42:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:42:55] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 14:42:55 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:42:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 14:43:07 | INFO     | Upload request received
+2026-04-15 14:43:07 | INFO     | File saved: C:\Users\Public\whatsapp-analyzer\uploads\20260415_144307_whatsapp-chat-data.txt
+2026-04-15 14:43:07 | INFO     | Starting pipeline...
+2026-04-15 14:43:07 | INFO     | ==================================================
+2026-04-15 14:43:07 | INFO     | WHATSAPP NLP ANALYSIS PIPELINE STARTED
+2026-04-15 14:43:07 | INFO     | File      : C:\Users\Public\whatsapp-analyzer\uploads\20260415_144307_whatsapp-chat-data.txt
+2026-04-15 14:43:07 | INFO     | Timestamp : 2026-04-15 14:43:07
+2026-04-15 14:43:07 | INFO     | ==================================================
+2026-04-15 14:43:07 | INFO     | STEP 1/7 — Parsing chat file...
+2026-04-15 14:43:07 | INFO     | Reading file: C:\Users\Public\whatsapp-analyzer\uploads\20260415_144307_whatsapp-chat-data.txt
+2026-04-15 14:43:07 | INFO     | Detected format pattern with 30 matches in sample.
+2026-04-15 14:43:07 | INFO     | Found 13655 raw message blocks.
+2026-04-15 14:43:08 | INFO     | Successfully parsed 13379 messages from 154 senders.
+2026-04-15 14:43:08 | INFO     | STEP 2/7 — Cleaning and processing...
+2026-04-15 14:43:08 | INFO     | Starting data processing pipeline...
+2026-04-15 14:43:08 | INFO     | Input: 13379 messages
+2026-04-15 14:43:08 | INFO     | Step 1/3 — Extracting emojis...
+2026-04-15 14:43:08 | INFO     | Step 2/3 — Detecting URLs...
+2026-04-15 14:43:08 | INFO     | Step 3/3 — Cleaning message text...
+2026-04-15 14:43:11 | INFO     | Data processing complete!
+2026-04-15 14:43:11 | INFO     |   Total messages         : 13379
+2026-04-15 14:43:11 | INFO     |   Messages with text     : 9669
+2026-04-15 14:43:11 | INFO     |   Messages with emojis   : 1858 (2247 total emojis)
+2026-04-15 14:43:11 | INFO     |   Messages with URLs     : 575
+2026-04-15 14:43:11 | INFO     |   Mode: FULL — training ML model from scratch
+2026-04-15 14:43:11 | INFO     | STEP 3/7 — NLP feature extraction...
+2026-04-15 14:43:11 | INFO     | Starting NLP processing pipeline...
+2026-04-15 14:43:11 | INFO     | Input: 13379 messages from 154 senders
+2026-04-15 14:43:11 | INFO     | Step 1/6 — Computing word frequencies...
+2026-04-15 14:43:12 | INFO     |   Word frequency: 6564 unique words found.
+2026-04-15 14:43:12 | INFO     | Step 2/6 — Extracting bigrams and trigrams...
+2026-04-15 14:43:12 | INFO     |   2-grams: 30563 unique 2-grams found.
+2026-04-15 14:43:12 | INFO     |   3-grams: 29091 unique 3-grams found.
+2026-04-15 14:43:12 | INFO     | Step 3/6 — Computing TF-IDF keywords per sender...
+2026-04-15 14:43:12 | INFO     |   TF-IDF keywords extracted for 137 senders.
+2026-04-15 14:43:12 | INFO     | Step 4/6 — Computing per-user statistics...
+2026-04-15 14:43:12 | INFO     |   User stats computed for 154 senders.
+2026-04-15 14:43:12 | INFO     | Step 5/6 — Analysing activity patterns...
+2026-04-15 14:43:12 | INFO     |   Activity patterns computed (hour / day / month / date).
+2026-04-15 14:43:12 | INFO     | Step 6/6 — Computing response times...
+2026-04-15 14:43:14 | INFO     |   Response times computed for 145 senders.
+2026-04-15 14:43:14 | INFO     | NLP processing complete!
+2026-04-15 14:43:14 | INFO     |   Total words     : 50,960
+2026-04-15 14:43:14 | INFO     |   Unique words    : 6,564
+2026-04-15 14:43:14 | INFO     |   Bigrams found   : 30,563
+2026-04-15 14:43:14 | INFO     |   Trigrams found  : 29,091
+2026-04-15 14:43:14 | INFO     |   Senders         : 154
+2026-04-15 14:43:14 | INFO     |   Peak hour       : 21:00
+2026-04-15 14:43:14 | INFO     |   Most active day : Sunday
+2026-04-15 14:43:14 | INFO     | STEP 4/7 — Sentiment analysis (VADER + TextBlob)...
+2026-04-15 14:43:14 | INFO     | Starting sentiment analysis...
+2026-04-15 14:43:14 | INFO     | Input: 13379 messages
+2026-04-15 14:43:14 | INFO     | Running VADER + TextBlob on all messages...
+2026-04-15 14:43:22 | INFO     | Sentiment analysis complete!
+2026-04-15 14:43:22 | INFO     |   Positive  :  3395 (25.4%)
+2026-04-15 14:43:22 | INFO     |   Neutral   :  8792 (65.7%)
+2026-04-15 14:43:22 | INFO     |   Negative  :  1192 (8.9%)
+2026-04-15 14:43:22 | INFO     |   Avg score : 0.0774
+2026-04-15 14:43:22 | INFO     | STEP 5/7 — Training ML classifier...
+2026-04-15 14:43:22 | INFO     | Training samples: 462 (2 classes, ~231 each, tier=High)
+2026-04-15 14:43:22 | INFO     | ==================================================
+2026-04-15 14:43:22 | INFO     | Starting ML classifier training...
+2026-04-15 14:43:22 | INFO     | ==================================================
+2026-04-15 14:43:22 | INFO     | Step 1/4 — Preparing training data...
+2026-04-15 14:43:22 | INFO     |   Training data prepared: 462 samples
+2026-04-15 14:43:22 | INFO     |     Positive    : 231 (50.0%)
+2026-04-15 14:43:22 | INFO     |     Negative    : 231 (50.0%)
+2026-04-15 14:43:22 | INFO     | Step 2/4 — Splitting 80% train / 20% test...
+2026-04-15 14:43:22 | INFO     |   Train: 369 samples | Test: 93 samples
+2026-04-15 14:43:22 | INFO     | Step 3/4 — Building model pipelines...
+2026-04-15 14:43:22 | INFO     | Step 4/4 — Training and evaluating models...
+2026-04-15 14:43:22 | INFO     |   Training Naive Bayes...
+2026-04-15 14:43:24 | INFO     |     Accuracy : 0.8817
+2026-04-15 14:43:24 | INFO     |     F1 Score : 0.8817
+2026-04-15 14:43:24 | INFO     |     CV Mean  : 0.8682 (+/- 0.1770)
+2026-04-15 14:43:24 | INFO     |   Training Logistic Regression...
+2026-04-15 14:43:27 | INFO     |     Accuracy : 0.8387
+2026-04-15 14:43:27 | INFO     |     F1 Score : 0.8377
+2026-04-15 14:43:27 | INFO     |     CV Mean  : 0.9053 (+/- 0.1385)
+2026-04-15 14:43:27 | INFO     |   Best model: Naive Bayes (F1: 0.8817)
+2026-04-15 14:43:27 | INFO     | ==================================================
+2026-04-15 14:43:27 | INFO     | Training complete!
+2026-04-15 14:43:27 | INFO     |   Best model : Naive Bayes
+2026-04-15 14:43:27 | INFO     |   Accuracy   : 0.8817
+2026-04-15 14:43:27 | INFO     |   F1 Score   : 0.8817
+2026-04-15 14:43:27 | INFO     |   CV Mean    : 0.8682 (+/- 0.1770)
+2026-04-15 14:43:27 | INFO     | ==================================================
+2026-04-15 14:43:27 | INFO     |     Accuracy   : 0.8817 (88.2%)
+2026-04-15 14:43:27 | INFO     |     F1 Score   : 0.8817
+2026-04-15 14:43:27 | INFO     |     CV Mean    : 0.8682 (+/- 0.1770)
+2026-04-15 14:43:27 | INFO     | STEP 5/7 — Running ML predictions on full chat...
+2026-04-15 14:43:27 | INFO     | VADER vs ML agreement rate: 31.4%
+2026-04-15 14:43:27 | INFO     | STEP 6/7 — Generating charts...
+2026-04-15 14:43:27 | INFO     | Generating all charts...
+2026-04-15 14:43:27 | INFO     | Output directory: results\visualizations
+2026-04-15 14:43:27 | INFO     | Chart 01/10 — wordcloud...
+2026-04-15 14:43:29 | INFO     |   Saved: 01_wordcloud.png
+2026-04-15 14:43:29 | INFO     | Chart 02/10 — top_words...
+2026-04-15 14:43:29 | INFO     |   Saved: 02_top_words.png
+2026-04-15 14:43:29 | INFO     | Chart 03/10 — hourly_activity...
+2026-04-15 14:43:29 | INFO     |   Saved: 03_hourly_activity.png
+2026-04-15 14:43:29 | INFO     | Chart 04/10 — daily_activity...
+2026-04-15 14:43:29 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 14:43:29 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-15 14:43:29 | INFO     |   Saved: 04_daily_activity.png
+2026-04-15 14:43:29 | INFO     | Chart 05/10 — monthly_activity...
+2026-04-15 14:43:30 | INFO     |   Saved: 05_monthly_activity.png
+2026-04-15 14:43:30 | INFO     | Chart 06/10 — user_participation...
+2026-04-15 14:43:31 | INFO     |   Saved: 06_user_participation.png
+2026-04-15 14:43:31 | INFO     | Chart 07/10 — top_bigrams...
+2026-04-15 14:43:32 | INFO     |   Saved: 07_top_bigrams.png
+2026-04-15 14:43:32 | INFO     | Chart 08/10 — sentiment_distribution...
+2026-04-15 14:43:32 | INFO     |   Saved: 08_sentiment_distribution.png
+2026-04-15 14:43:32 | INFO     | Chart 09/10 — sentiment_trend...
+2026-04-15 14:43:32 | INFO     |   Saved: 09_sentiment_trend.png
+2026-04-15 14:43:32 | INFO     | Chart 10/10 — sentiment_by_user...
+2026-04-15 14:43:36 | INFO     |   Saved: 10_sentiment_by_user.png
+2026-04-15 14:43:36 | INFO     | Chart generation complete: 10/10 charts saved.
+2026-04-15 14:43:36 | INFO     | STEP 7/7 — Building dashboard summaries...
+2026-04-15 14:43:36 | INFO     | ==================================================
+2026-04-15 14:43:36 | INFO     | PIPELINE COMPLETED SUCCESSFULLY
+2026-04-15 14:43:36 | INFO     | Mode           : FULL
+2026-04-15 14:43:36 | INFO     | ML Trained     : True
+2026-04-15 14:43:36 | INFO     | Processing Time: 28.38s
+2026-04-15 14:43:36 | INFO     | ==================================================
+2026-04-15 14:43:36 | INFO     | Pipeline complete in 28.38s — redirecting to dashboard
+2026-04-15 14:43:36 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:43:36] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-04-15 14:43:36 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:43:36] "GET /dashboard HTTP/1.1" 200 -
+2026-04-15 14:43:36 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:43:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 14:43:36 | INFO     | 127.0.0.1 - - [15/Apr/2026 14:43:36] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 14:44:21 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\src\\sentiment_classifier.py', reloading
+2026-04-15 14:44:23 | INFO     |  * Restarting with stat
+2026-04-15 14:44:27 | INFO     | =======================================================
+2026-04-15 14:44:27 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 14:44:27 | INFO     | =======================================================
+2026-04-15 14:44:27 | INFO     |  URL      : http://localhost:5000
+2026-04-15 14:44:27 | INFO     |  Debug    : True
+2026-04-15 14:44:27 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 14:44:27 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 14:44:27 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 14:44:27 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 14:44:27 | INFO     | =======================================================
+2026-04-15 14:44:27 | WARNING  |  * Debugger is active!
+2026-04-15 14:44:27 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:04:02 | INFO     | =======================================================
+2026-04-15 15:04:02 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:04:02 | INFO     | =======================================================
+2026-04-15 15:04:02 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:04:02 | INFO     |  Debug    : True
+2026-04-15 15:04:02 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:04:02 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:04:02 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:04:02 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:04:02 | INFO     | =======================================================
+2026-04-15 15:04:02 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.64.38.174:5000
+2026-04-15 15:04:02 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-15 15:04:02 | INFO     |  * Restarting with stat
+2026-04-15 15:04:04 | INFO     | =======================================================
+2026-04-15 15:04:04 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:04:04 | INFO     | =======================================================
+2026-04-15 15:04:04 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:04:04 | INFO     |  Debug    : True
+2026-04-15 15:04:04 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:04:04 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:04:04 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:04:04 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:04:04 | INFO     | =======================================================
+2026-04-15 15:04:04 | WARNING  |  * Debugger is active!
+2026-04-15 15:04:04 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:04:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 15:04:23] "GET / HTTP/1.1" 200 -
+2026-04-15 15:04:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 15:04:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-15 15:04:23 | INFO     | 127.0.0.1 - - [15/Apr/2026 15:04:23] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-15 15:04:26 | INFO     | 127.0.0.1 - - [15/Apr/2026 15:04:26] "GET /status HTTP/1.1" 200 -
+2026-04-15 15:18:39 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:18:39 | INFO     |  * Restarting with stat
+2026-04-15 15:18:42 | INFO     | =======================================================
+2026-04-15 15:18:42 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:18:42 | INFO     | =======================================================
+2026-04-15 15:18:42 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:18:42 | INFO     |  Debug    : True
+2026-04-15 15:18:42 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:18:42 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:18:42 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:18:42 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:18:42 | INFO     | =======================================================
+2026-04-15 15:18:42 | WARNING  |  * Debugger is active!
+2026-04-15 15:18:42 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:18:56 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_whatsapp_parser.py', reloading
+2026-04-15 15:18:56 | INFO     |  * Restarting with stat
+2026-04-15 15:18:59 | INFO     | =======================================================
+2026-04-15 15:18:59 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:18:59 | INFO     | =======================================================
+2026-04-15 15:18:59 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:18:59 | INFO     |  Debug    : True
+2026-04-15 15:18:59 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:18:59 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:18:59 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:18:59 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:18:59 | INFO     | =======================================================
+2026-04-15 15:18:59 | WARNING  |  * Debugger is active!
+2026-04-15 15:18:59 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:19:12 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:19:12 | INFO     |  * Restarting with stat
+2026-04-15 15:19:15 | INFO     | =======================================================
+2026-04-15 15:19:15 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:19:15 | INFO     | =======================================================
+2026-04-15 15:19:15 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:19:15 | INFO     |  Debug    : True
+2026-04-15 15:19:15 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:19:15 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:19:15 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:19:15 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:19:15 | INFO     | =======================================================
+2026-04-15 15:19:15 | WARNING  |  * Debugger is active!
+2026-04-15 15:19:15 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:19:28 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_nlp_processor.py', reloading
+2026-04-15 15:19:28 | INFO     |  * Restarting with stat
+2026-04-15 15:19:31 | INFO     | =======================================================
+2026-04-15 15:19:31 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:19:31 | INFO     | =======================================================
+2026-04-15 15:19:31 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:19:31 | INFO     |  Debug    : True
+2026-04-15 15:19:31 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:19:31 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:19:31 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:19:31 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:19:31 | INFO     | =======================================================
+2026-04-15 15:19:31 | WARNING  |  * Debugger is active!
+2026-04-15 15:19:31 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:19:44 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_sentiment_analyzer.py', reloading
+2026-04-15 15:19:45 | INFO     |  * Restarting with stat
+2026-04-15 15:19:48 | INFO     | =======================================================
+2026-04-15 15:19:48 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:19:48 | INFO     | =======================================================
+2026-04-15 15:19:48 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:19:48 | INFO     |  Debug    : True
+2026-04-15 15:19:48 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:19:48 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:19:48 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:19:48 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:19:48 | INFO     | =======================================================
+2026-04-15 15:19:48 | WARNING  |  * Debugger is active!
+2026-04-15 15:19:48 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:20:02 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_sentiment_classifier.py', reloading
+2026-04-15 15:20:02 | INFO     |  * Restarting with stat
+2026-04-15 15:20:05 | INFO     | =======================================================
+2026-04-15 15:20:05 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:20:05 | INFO     | =======================================================
+2026-04-15 15:20:05 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:20:05 | INFO     |  Debug    : True
+2026-04-15 15:20:05 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:20:05 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:20:05 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:20:05 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:20:05 | INFO     | =======================================================
+2026-04-15 15:20:05 | WARNING  |  * Debugger is active!
+2026-04-15 15:20:05 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:20:18 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_pipeline.py', reloading
+2026-04-15 15:20:19 | INFO     |  * Restarting with stat
+2026-04-15 15:20:21 | INFO     | =======================================================
+2026-04-15 15:20:21 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:20:21 | INFO     | =======================================================
+2026-04-15 15:20:21 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:20:21 | INFO     |  Debug    : True
+2026-04-15 15:20:21 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:20:21 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:20:21 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:20:21 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:20:21 | INFO     | =======================================================
+2026-04-15 15:20:21 | WARNING  |  * Debugger is active!
+2026-04-15 15:20:21 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:20:34 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:20:34 | INFO     |  * Restarting with stat
+2026-04-15 15:20:37 | INFO     | =======================================================
+2026-04-15 15:20:37 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:20:37 | INFO     | =======================================================
+2026-04-15 15:20:37 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:20:37 | INFO     |  Debug    : True
+2026-04-15 15:20:37 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:20:37 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:20:37 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:20:37 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:20:37 | INFO     | =======================================================
+2026-04-15 15:20:37 | WARNING  |  * Debugger is active!
+2026-04-15 15:20:37 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:25:29 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:25:29 | INFO     |  * Restarting with stat
+2026-04-15 15:25:32 | INFO     | =======================================================
+2026-04-15 15:25:32 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:25:32 | INFO     | =======================================================
+2026-04-15 15:25:32 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:25:32 | INFO     |  Debug    : True
+2026-04-15 15:25:32 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:25:32 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:25:32 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:25:32 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:25:32 | INFO     | =======================================================
+2026-04-15 15:25:32 | WARNING  |  * Debugger is active!
+2026-04-15 15:25:32 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:25:34 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:25:35 | INFO     |  * Restarting with stat
+2026-04-15 15:25:37 | INFO     | =======================================================
+2026-04-15 15:25:37 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:25:37 | INFO     | =======================================================
+2026-04-15 15:25:37 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:25:37 | INFO     |  Debug    : True
+2026-04-15 15:25:37 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:25:37 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:25:37 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:25:37 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:25:37 | INFO     | =======================================================
+2026-04-15 15:25:37 | WARNING  |  * Debugger is active!
+2026-04-15 15:25:37 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:25:39 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:25:39 | INFO     |  * Restarting with stat
+2026-04-15 15:25:42 | INFO     | =======================================================
+2026-04-15 15:25:42 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:25:42 | INFO     | =======================================================
+2026-04-15 15:25:42 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:25:42 | INFO     |  Debug    : True
+2026-04-15 15:25:42 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:25:42 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:25:42 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:25:42 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:25:42 | INFO     | =======================================================
+2026-04-15 15:25:42 | WARNING  |  * Debugger is active!
+2026-04-15 15:25:42 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:25:42 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:25:42 | INFO     |  * Restarting with stat
+2026-04-15 15:25:45 | INFO     | =======================================================
+2026-04-15 15:25:45 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:25:45 | INFO     | =======================================================
+2026-04-15 15:25:45 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:25:45 | INFO     |  Debug    : True
+2026-04-15 15:25:45 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:25:45 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:25:45 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:25:45 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:25:45 | INFO     | =======================================================
+2026-04-15 15:25:45 | WARNING  |  * Debugger is active!
+2026-04-15 15:25:45 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:25:54 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:25:55 | INFO     |  * Restarting with stat
+2026-04-15 15:25:57 | INFO     | =======================================================
+2026-04-15 15:25:57 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:25:57 | INFO     | =======================================================
+2026-04-15 15:25:57 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:25:57 | INFO     |  Debug    : True
+2026-04-15 15:25:57 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:25:57 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:25:57 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:25:57 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:25:57 | INFO     | =======================================================
+2026-04-15 15:25:57 | WARNING  |  * Debugger is active!
+2026-04-15 15:25:57 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:00 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:00 | INFO     |  * Restarting with stat
+2026-04-15 15:26:03 | INFO     | =======================================================
+2026-04-15 15:26:03 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:03 | INFO     | =======================================================
+2026-04-15 15:26:03 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:03 | INFO     |  Debug    : True
+2026-04-15 15:26:03 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:03 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:03 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:03 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:03 | INFO     | =======================================================
+2026-04-15 15:26:03 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:03 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:07 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:08 | INFO     |  * Restarting with stat
+2026-04-15 15:26:10 | INFO     | =======================================================
+2026-04-15 15:26:10 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:10 | INFO     | =======================================================
+2026-04-15 15:26:10 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:10 | INFO     |  Debug    : True
+2026-04-15 15:26:10 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:10 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:10 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:10 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:10 | INFO     | =======================================================
+2026-04-15 15:26:10 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:10 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:16 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:16 | INFO     |  * Restarting with stat
+2026-04-15 15:26:19 | INFO     | =======================================================
+2026-04-15 15:26:19 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:19 | INFO     | =======================================================
+2026-04-15 15:26:19 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:19 | INFO     |  Debug    : True
+2026-04-15 15:26:19 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:19 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:19 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:19 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:19 | INFO     | =======================================================
+2026-04-15 15:26:19 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:19 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:26 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:26 | INFO     |  * Restarting with stat
+2026-04-15 15:26:29 | INFO     | =======================================================
+2026-04-15 15:26:29 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:29 | INFO     | =======================================================
+2026-04-15 15:26:29 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:29 | INFO     |  Debug    : True
+2026-04-15 15:26:29 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:29 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:29 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:29 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:29 | INFO     | =======================================================
+2026-04-15 15:26:29 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:29 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:31 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:32 | INFO     |  * Restarting with stat
+2026-04-15 15:26:34 | INFO     | =======================================================
+2026-04-15 15:26:34 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:34 | INFO     | =======================================================
+2026-04-15 15:26:34 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:34 | INFO     |  Debug    : True
+2026-04-15 15:26:34 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:34 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:34 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:34 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:34 | INFO     | =======================================================
+2026-04-15 15:26:34 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:34 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:40 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:40 | INFO     |  * Restarting with stat
+2026-04-15 15:26:43 | INFO     | =======================================================
+2026-04-15 15:26:43 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:43 | INFO     | =======================================================
+2026-04-15 15:26:43 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:43 | INFO     |  Debug    : True
+2026-04-15 15:26:43 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:43 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:43 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:43 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:43 | INFO     | =======================================================
+2026-04-15 15:26:43 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:43 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:44 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:44 | INFO     |  * Restarting with stat
+2026-04-15 15:26:47 | INFO     | =======================================================
+2026-04-15 15:26:47 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:47 | INFO     | =======================================================
+2026-04-15 15:26:47 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:47 | INFO     |  Debug    : True
+2026-04-15 15:26:47 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:47 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:47 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:47 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:47 | INFO     | =======================================================
+2026-04-15 15:26:47 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:47 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:53 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:53 | INFO     |  * Restarting with stat
+2026-04-15 15:26:56 | INFO     | =======================================================
+2026-04-15 15:26:56 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:56 | INFO     | =======================================================
+2026-04-15 15:26:56 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:56 | INFO     |  Debug    : True
+2026-04-15 15:26:56 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:56 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:56 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:56 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:56 | INFO     | =======================================================
+2026-04-15 15:26:56 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:56 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:26:56 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:26:57 | INFO     |  * Restarting with stat
+2026-04-15 15:26:59 | INFO     | =======================================================
+2026-04-15 15:26:59 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:26:59 | INFO     | =======================================================
+2026-04-15 15:26:59 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:26:59 | INFO     |  Debug    : True
+2026-04-15 15:26:59 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:26:59 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:26:59 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:26:59 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:26:59 | INFO     | =======================================================
+2026-04-15 15:26:59 | WARNING  |  * Debugger is active!
+2026-04-15 15:26:59 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:04 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:04 | INFO     |  * Restarting with stat
+2026-04-15 15:27:07 | INFO     | =======================================================
+2026-04-15 15:27:07 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:07 | INFO     | =======================================================
+2026-04-15 15:27:07 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:07 | INFO     |  Debug    : True
+2026-04-15 15:27:07 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:07 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:07 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:07 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:07 | INFO     | =======================================================
+2026-04-15 15:27:07 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:07 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:13 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:13 | INFO     |  * Restarting with stat
+2026-04-15 15:27:16 | INFO     | =======================================================
+2026-04-15 15:27:16 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:16 | INFO     | =======================================================
+2026-04-15 15:27:16 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:16 | INFO     |  Debug    : True
+2026-04-15 15:27:16 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:16 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:16 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:16 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:16 | INFO     | =======================================================
+2026-04-15 15:27:16 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:16 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:18 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:19 | INFO     |  * Restarting with stat
+2026-04-15 15:27:21 | INFO     | =======================================================
+2026-04-15 15:27:21 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:21 | INFO     | =======================================================
+2026-04-15 15:27:21 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:21 | INFO     |  Debug    : True
+2026-04-15 15:27:21 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:21 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:21 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:21 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:21 | INFO     | =======================================================
+2026-04-15 15:27:21 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:21 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:26 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:26 | INFO     |  * Restarting with stat
+2026-04-15 15:27:29 | INFO     | =======================================================
+2026-04-15 15:27:29 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:29 | INFO     | =======================================================
+2026-04-15 15:27:29 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:29 | INFO     |  Debug    : True
+2026-04-15 15:27:29 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:29 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:29 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:29 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:29 | INFO     | =======================================================
+2026-04-15 15:27:29 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:29 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:34 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:34 | INFO     |  * Restarting with stat
+2026-04-15 15:27:37 | INFO     | =======================================================
+2026-04-15 15:27:37 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:37 | INFO     | =======================================================
+2026-04-15 15:27:37 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:37 | INFO     |  Debug    : True
+2026-04-15 15:27:37 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:37 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:37 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:37 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:37 | INFO     | =======================================================
+2026-04-15 15:27:37 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:37 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:40 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:41 | INFO     |  * Restarting with stat
+2026-04-15 15:27:43 | INFO     | =======================================================
+2026-04-15 15:27:43 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:43 | INFO     | =======================================================
+2026-04-15 15:27:43 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:43 | INFO     |  Debug    : True
+2026-04-15 15:27:43 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:43 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:43 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:43 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:43 | INFO     | =======================================================
+2026-04-15 15:27:43 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:43 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:27:46 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\conftest.py', reloading
+2026-04-15 15:27:46 | INFO     |  * Restarting with stat
+2026-04-15 15:27:49 | INFO     | =======================================================
+2026-04-15 15:27:49 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:27:49 | INFO     | =======================================================
+2026-04-15 15:27:49 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:27:49 | INFO     |  Debug    : True
+2026-04-15 15:27:49 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:27:49 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:27:49 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:27:49 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:27:49 | INFO     | =======================================================
+2026-04-15 15:27:49 | WARNING  |  * Debugger is active!
+2026-04-15 15:27:49 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:30:38 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:30:38 | INFO     |  * Restarting with stat
+2026-04-15 15:30:41 | INFO     | =======================================================
+2026-04-15 15:30:41 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:30:41 | INFO     | =======================================================
+2026-04-15 15:30:41 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:30:41 | INFO     |  Debug    : True
+2026-04-15 15:30:41 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:30:41 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:30:41 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:30:41 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:30:41 | INFO     | =======================================================
+2026-04-15 15:30:41 | WARNING  |  * Debugger is active!
+2026-04-15 15:30:41 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:30:47 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:30:47 | INFO     |  * Restarting with stat
+2026-04-15 15:30:50 | INFO     | =======================================================
+2026-04-15 15:30:50 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:30:50 | INFO     | =======================================================
+2026-04-15 15:30:50 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:30:50 | INFO     |  Debug    : True
+2026-04-15 15:30:50 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:30:50 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:30:50 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:30:50 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:30:50 | INFO     | =======================================================
+2026-04-15 15:30:50 | WARNING  |  * Debugger is active!
+2026-04-15 15:30:50 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:30:57 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:30:57 | INFO     |  * Restarting with stat
+2026-04-15 15:31:00 | INFO     | =======================================================
+2026-04-15 15:31:00 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:31:00 | INFO     | =======================================================
+2026-04-15 15:31:00 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:31:00 | INFO     |  Debug    : True
+2026-04-15 15:31:00 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:31:00 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:31:00 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:31:00 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:31:00 | INFO     | =======================================================
+2026-04-15 15:31:00 | WARNING  |  * Debugger is active!
+2026-04-15 15:31:00 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:31:06 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:31:06 | INFO     |  * Restarting with stat
+2026-04-15 15:31:09 | INFO     | =======================================================
+2026-04-15 15:31:09 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:31:09 | INFO     | =======================================================
+2026-04-15 15:31:09 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:31:09 | INFO     |  Debug    : True
+2026-04-15 15:31:09 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:31:09 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:31:09 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:31:09 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:31:09 | INFO     | =======================================================
+2026-04-15 15:31:09 | WARNING  |  * Debugger is active!
+2026-04-15 15:31:09 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:31:16 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:31:16 | INFO     |  * Restarting with stat
+2026-04-15 15:31:18 | INFO     | =======================================================
+2026-04-15 15:31:18 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:31:18 | INFO     | =======================================================
+2026-04-15 15:31:18 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:31:18 | INFO     |  Debug    : True
+2026-04-15 15:31:18 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:31:18 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:31:18 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:31:18 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:31:18 | INFO     | =======================================================
+2026-04-15 15:31:18 | WARNING  |  * Debugger is active!
+2026-04-15 15:31:18 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:31:22 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:31:22 | INFO     |  * Restarting with stat
+2026-04-15 15:31:25 | INFO     | =======================================================
+2026-04-15 15:31:25 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:31:25 | INFO     | =======================================================
+2026-04-15 15:31:25 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:31:25 | INFO     |  Debug    : True
+2026-04-15 15:31:25 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:31:25 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:31:25 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:31:25 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:31:25 | INFO     | =======================================================
+2026-04-15 15:31:25 | WARNING  |  * Debugger is active!
+2026-04-15 15:31:25 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:31:50 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:31:51 | INFO     |  * Restarting with stat
+2026-04-15 15:31:53 | INFO     | =======================================================
+2026-04-15 15:31:53 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:31:53 | INFO     | =======================================================
+2026-04-15 15:31:53 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:31:53 | INFO     |  Debug    : True
+2026-04-15 15:31:53 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:31:53 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:31:53 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:31:53 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:31:53 | INFO     | =======================================================
+2026-04-15 15:31:53 | WARNING  |  * Debugger is active!
+2026-04-15 15:31:53 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:03 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:03 | INFO     |  * Restarting with stat
+2026-04-15 15:32:06 | INFO     | =======================================================
+2026-04-15 15:32:06 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:06 | INFO     | =======================================================
+2026-04-15 15:32:06 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:06 | INFO     |  Debug    : True
+2026-04-15 15:32:06 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:06 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:06 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:06 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:06 | INFO     | =======================================================
+2026-04-15 15:32:06 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:06 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:08 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:09 | INFO     |  * Restarting with stat
+2026-04-15 15:32:11 | INFO     | =======================================================
+2026-04-15 15:32:11 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:11 | INFO     | =======================================================
+2026-04-15 15:32:11 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:11 | INFO     |  Debug    : True
+2026-04-15 15:32:11 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:11 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:11 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:11 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:11 | INFO     | =======================================================
+2026-04-15 15:32:11 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:11 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:29 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:30 | INFO     |  * Restarting with stat
+2026-04-15 15:32:32 | INFO     | =======================================================
+2026-04-15 15:32:32 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:32 | INFO     | =======================================================
+2026-04-15 15:32:32 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:32 | INFO     |  Debug    : True
+2026-04-15 15:32:32 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:32 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:32 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:32 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:32 | INFO     | =======================================================
+2026-04-15 15:32:32 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:32 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:36 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:36 | INFO     |  * Restarting with stat
+2026-04-15 15:32:39 | INFO     | =======================================================
+2026-04-15 15:32:39 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:39 | INFO     | =======================================================
+2026-04-15 15:32:39 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:39 | INFO     |  Debug    : True
+2026-04-15 15:32:39 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:39 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:39 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:39 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:39 | INFO     | =======================================================
+2026-04-15 15:32:39 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:39 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:44 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:44 | INFO     |  * Restarting with stat
+2026-04-15 15:32:46 | INFO     | =======================================================
+2026-04-15 15:32:46 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:46 | INFO     | =======================================================
+2026-04-15 15:32:46 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:46 | INFO     |  Debug    : True
+2026-04-15 15:32:46 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:46 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:46 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:46 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:46 | INFO     | =======================================================
+2026-04-15 15:32:46 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:46 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:32:50 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_app.py', reloading
+2026-04-15 15:32:50 | INFO     |  * Restarting with stat
+2026-04-15 15:32:53 | INFO     | =======================================================
+2026-04-15 15:32:53 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:32:53 | INFO     | =======================================================
+2026-04-15 15:32:53 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:32:53 | INFO     |  Debug    : True
+2026-04-15 15:32:53 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:32:53 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:32:53 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:32:53 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:32:53 | INFO     | =======================================================
+2026-04-15 15:32:53 | WARNING  |  * Debugger is active!
+2026-04-15 15:32:53 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:33:32 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:33:33 | INFO     |  * Restarting with stat
+2026-04-15 15:33:35 | INFO     | =======================================================
+2026-04-15 15:33:35 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:33:35 | INFO     | =======================================================
+2026-04-15 15:33:35 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:33:35 | INFO     |  Debug    : True
+2026-04-15 15:33:35 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:33:35 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:33:35 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:33:35 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:33:35 | INFO     | =======================================================
+2026-04-15 15:33:35 | WARNING  |  * Debugger is active!
+2026-04-15 15:33:35 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:33:38 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:33:38 | INFO     |  * Restarting with stat
+2026-04-15 15:33:41 | INFO     | =======================================================
+2026-04-15 15:33:41 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:33:41 | INFO     | =======================================================
+2026-04-15 15:33:41 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:33:41 | INFO     |  Debug    : True
+2026-04-15 15:33:41 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:33:41 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:33:41 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:33:41 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:33:41 | INFO     | =======================================================
+2026-04-15 15:33:41 | WARNING  |  * Debugger is active!
+2026-04-15 15:33:41 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:33:47 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:33:47 | INFO     |  * Restarting with stat
+2026-04-15 15:33:50 | INFO     | =======================================================
+2026-04-15 15:33:50 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:33:50 | INFO     | =======================================================
+2026-04-15 15:33:50 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:33:50 | INFO     |  Debug    : True
+2026-04-15 15:33:50 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:33:50 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:33:50 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:33:50 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:33:50 | INFO     | =======================================================
+2026-04-15 15:33:50 | WARNING  |  * Debugger is active!
+2026-04-15 15:33:50 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:33:52 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:33:52 | INFO     |  * Restarting with stat
+2026-04-15 15:33:55 | INFO     | =======================================================
+2026-04-15 15:33:55 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:33:55 | INFO     | =======================================================
+2026-04-15 15:33:55 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:33:55 | INFO     |  Debug    : True
+2026-04-15 15:33:55 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:33:55 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:33:55 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:33:55 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:33:55 | INFO     | =======================================================
+2026-04-15 15:33:55 | WARNING  |  * Debugger is active!
+2026-04-15 15:33:55 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:01 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:01 | INFO     |  * Restarting with stat
+2026-04-15 15:34:04 | INFO     | =======================================================
+2026-04-15 15:34:04 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:04 | INFO     | =======================================================
+2026-04-15 15:34:04 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:04 | INFO     |  Debug    : True
+2026-04-15 15:34:04 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:04 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:04 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:04 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:04 | INFO     | =======================================================
+2026-04-15 15:34:04 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:04 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:06 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:06 | INFO     |  * Restarting with stat
+2026-04-15 15:34:09 | INFO     | =======================================================
+2026-04-15 15:34:09 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:09 | INFO     | =======================================================
+2026-04-15 15:34:09 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:09 | INFO     |  Debug    : True
+2026-04-15 15:34:09 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:09 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:09 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:09 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:09 | INFO     | =======================================================
+2026-04-15 15:34:09 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:09 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:15 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:15 | INFO     |  * Restarting with stat
+2026-04-15 15:34:18 | INFO     | =======================================================
+2026-04-15 15:34:18 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:18 | INFO     | =======================================================
+2026-04-15 15:34:18 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:18 | INFO     |  Debug    : True
+2026-04-15 15:34:18 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:18 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:18 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:18 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:18 | INFO     | =======================================================
+2026-04-15 15:34:18 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:18 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:20 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:20 | INFO     |  * Restarting with stat
+2026-04-15 15:34:22 | INFO     | =======================================================
+2026-04-15 15:34:22 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:22 | INFO     | =======================================================
+2026-04-15 15:34:22 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:22 | INFO     |  Debug    : True
+2026-04-15 15:34:22 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:22 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:22 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:22 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:22 | INFO     | =======================================================
+2026-04-15 15:34:22 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:22 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:26 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:26 | INFO     |  * Restarting with stat
+2026-04-15 15:34:29 | INFO     | =======================================================
+2026-04-15 15:34:29 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:29 | INFO     | =======================================================
+2026-04-15 15:34:29 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:29 | INFO     |  Debug    : True
+2026-04-15 15:34:29 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:29 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:29 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:29 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:29 | INFO     | =======================================================
+2026-04-15 15:34:29 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:29 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:30 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_data_processor.py', reloading
+2026-04-15 15:34:31 | INFO     |  * Restarting with stat
+2026-04-15 15:34:33 | INFO     | =======================================================
+2026-04-15 15:34:33 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:33 | INFO     | =======================================================
+2026-04-15 15:34:33 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:33 | INFO     |  Debug    : True
+2026-04-15 15:34:33 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:33 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:33 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:33 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:33 | INFO     | =======================================================
+2026-04-15 15:34:33 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:33 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:46 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_nlp_processor.py', reloading
+2026-04-15 15:34:46 | INFO     |  * Restarting with stat
+2026-04-15 15:34:49 | INFO     | =======================================================
+2026-04-15 15:34:49 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:49 | INFO     | =======================================================
+2026-04-15 15:34:49 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:49 | INFO     |  Debug    : True
+2026-04-15 15:34:49 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:49 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:49 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:49 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:49 | INFO     | =======================================================
+2026-04-15 15:34:49 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:49 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-15 15:34:52 | INFO     |  * Detected change in 'C:\\Users\\Public\\whatsapp-analyzer\\tests\\test_nlp_processor.py', reloading
+2026-04-15 15:34:53 | INFO     |  * Restarting with stat
+2026-04-15 15:34:55 | INFO     | =======================================================
+2026-04-15 15:34:55 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-15 15:34:55 | INFO     | =======================================================
+2026-04-15 15:34:55 | INFO     |  URL      : http://localhost:5000
+2026-04-15 15:34:55 | INFO     |  Debug    : True
+2026-04-15 15:34:55 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-15 15:34:55 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-15 15:34:55 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-15 15:34:55 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-15 15:34:55 | INFO     | =======================================================
+2026-04-15 15:34:55 | WARNING  |  * Debugger is active!
+2026-04-15 15:34:55 | INFO     |  * Debugger PIN: 761-155-212

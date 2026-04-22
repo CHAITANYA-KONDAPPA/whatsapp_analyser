@@ -1,0 +1,8 @@
+[tool.coverage.run]
+source = ["src", "app", "main"]
+omit = ["*/tests/*", "setup.py"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
