@@ -9,8 +9,6 @@ ENV/
 .vscode/
 .idea/
 *.csv
-*.json
-*.pkl
 *.pickle
 .DS_Store
 Thumbs.db

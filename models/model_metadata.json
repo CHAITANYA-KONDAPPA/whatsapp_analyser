@@ -1,0 +1,14 @@
+{
+  "model_name": "Naive Bayes",
+  "accuracy": 0.8817,
+  "f1_score": 0.8817,
+  "cross_val_mean": 0.8682,
+  "cross_val_std": 0.177,
+  "training_samples": 369,
+  "test_samples": 93,
+  "classes": [
+    "Negative",
+    "Positive"
+  ],
+  "trained_at": "2026-04-15 14:43:27"
+}
