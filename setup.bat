@@ -5,7 +5,7 @@ REM ============================================================================
 REM Cross-platform setup script for Windows environments
 REM Run this file by double-clicking or: setup.bat
 REM
-REM Requirements: Python 3.9+ installed and added to PATH
+REM Requirements: Python 3.9-3.12 installed and added to PATH
 REM =============================================================================
 
 setlocal enabledelayedexpansion
@@ -22,7 +22,7 @@ python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python not found in PATH
     echo.
-    echo Please install Python 3.9 or higher from https://www.python.org
+    echo Please install Python 3.11 or 3.12 from https://www.python.org
     echo Make sure to check "Add Python to PATH" during installation
     echo.
     pause
@@ -31,6 +31,15 @@ if errorlevel 1 (
 
 for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
 echo ✓ Python %PYTHON_VERSION%
+
+python -c "import sys; raise SystemExit(0 if (sys.version_info.major == 3 and 9 <= sys.version_info.minor < 13) else 1)" >nul 2>&1
+if errorlevel 1 (
+    echo ERROR: This project supports Python 3.9 through 3.12.
+    echo Python 3.13+ can fail while installing packages such as Pillow and wordcloud.
+    echo Install Python 3.11 or 3.12, delete the old venv folder, and run setup again.
+    pause
+    exit /b 1
+)
 
 REM Create virtual environment
 echo.

@@ -6,7 +6,7 @@ Complete cross-platform installation instructions for Windows, macOS, and Linux.
 
 ## 📋 Prerequisites
 
-- **Python 3.9 or higher** — [Download](https://www.python.org/downloads/)
+- **Python 3.9 through 3.12** — [Download](https://www.python.org/downloads/)
 - **Git** (optional, for cloning) — [Download](https://git-scm.com/)
 - **Terminal/Command Prompt** knowledge (basic)
 
@@ -22,9 +22,9 @@ python --version
 python3 --version
 ```
 
-Expected output: `Python 3.9.x` or higher
+Expected output: `Python 3.9.x` through `Python 3.12.x`
 
-If not installed, download from [python.org](https://www.python.org/downloads)
+If you have Python 3.13 or newer, install Python 3.11 or 3.12. This project's pinned visualization packages can fail to install on Python 3.13.
 
 ---
 
@@ -101,10 +101,23 @@ Use this if the automatic scripts don't work.
 
 ### Step 1: Create Virtual Environment
 
-**Windows:**
+**Windows PowerShell:**
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+If activation is blocked in PowerShell:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
+```
+
+**Windows Command Prompt:**
 ```cmd
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate.bat
 ```
 
 **macOS / Linux:**

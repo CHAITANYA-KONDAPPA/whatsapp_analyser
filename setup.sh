@@ -6,7 +6,7 @@
 # Cross-platform setup script for Unix-like systems
 # Run: bash setup.sh
 #
-# Requirements: Python 3.9+ installed
+# Requirements: Python 3.9-3.12 installed
 # =============================================================================
 
 set -e  # Exit on error
@@ -35,7 +35,7 @@ echo "📱 OS: $OS_NAME"
 if ! command -v python3 &> /dev/null; then
     echo "❌ ERROR: Python3 not found"
     echo ""
-    echo "Install Python 3.9+ using:"
+    echo "Install Python 3.11 or 3.12 using:"
     echo ""
     if [[ "$OS_NAME" == "macOS" ]]; then
         echo "  # Using Homebrew (recommended)"
@@ -54,6 +54,13 @@ fi
 PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
 echo "✅ Python $PYTHON_VERSION"
 echo ""
+
+if ! python3 -c "import sys; raise SystemExit(0 if sys.version_info.major == 3 and 9 <= sys.version_info.minor < 13 else 1)"; then
+    echo "❌ ERROR: This project supports Python 3.9 through 3.12."
+    echo "Python 3.13+ can fail while installing packages such as Pillow and wordcloud."
+    echo "Install Python 3.11 or 3.12, delete the old venv folder, and run setup again."
+    exit 1
+fi
 
 # Create virtual environment
 echo "Step 1/5: Creating virtual environment..."

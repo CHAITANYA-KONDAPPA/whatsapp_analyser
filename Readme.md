@@ -16,17 +16,17 @@ NLP-based sentiment analysis and communication pattern extraction from WhatsApp 
 
 ## ⚙️ System Requirements
 
-- **Python**: 3.9 or higher
+- **Python**: 3.9 through 3.12
 - **OS**: Windows, macOS, Linux
 - **RAM**: 2+ GB recommended
 - **Disk**: 500 MB for dependencies + data
 
 **Check your Python version:**
 ```bash
-python --version  # Should show 3.9.x or higher
+python --version  # Should show 3.9.x through 3.12.x
 ```
 
-If not, download from [python.org](https://www.python.org/downloads)
+If you have Python 3.13 or newer, install Python 3.11 or 3.12 from [python.org](https://www.python.org/downloads). Some pinned visualization packages do not install cleanly on Python 3.13.
 
 ---
 
@@ -41,9 +41,9 @@ cd whatsapp-analyzer
 ### Step 2: Create Virtual Environment
 
 **Windows:**
-```cmd
+```powershell
 python -m venv venv
-venv\Scripts\activate
+.\venv\Scripts\Activate.ps1
 ```
 
 **macOS / Linux:**
@@ -55,7 +55,22 @@ source venv/bin/activate
 > ✅ You'll see `(venv)` prefix in your terminal when activated
 
 ### Step 3: Install Dependencies
-```bash
+```powershell
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt --no-cache-dir
+```
+
+If PowerShell blocks activation, run this once in the same terminal, then activate again:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
+```
+
+In Command Prompt, use this instead:
+
+```cmd
+venv\Scripts\activate.bat
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -123,13 +138,32 @@ whatsapp-analyzer/
 ### ❌ "python: command not found"
 - **macOS/Linux**: Use `python3` instead of `python`
 - **Windows**: Add Python to PATH or use full path
-- **Solution**: `python3 --version` should show 3.9+
+- **Solution**: `python3 --version` should show 3.9 through 3.12
 
-### ❌ "ModuleNotFoundError: No module named 'flask'"
+### ❌ PowerShell says "&& is not a valid statement separator" or "& character is not allowed"
+- You are using CMD syntax in Windows PowerShell 5.1.
+- **Solution**: run each command on its own line in PowerShell, or use `;` between commands.
+- To run a local batch file from PowerShell, prefix it with `.\`, for example:
+  ```powershell
+  .\setup.bat
+  ```
+
+### ❌ "Failed to build wordcloud" or "Failed to build Pillow"
+- Check `python --version`. If it says Python 3.13 or newer, recreate the environment with Python 3.11 or 3.12.
+- Delete the old `venv` folder, then run:
+  ```powershell
+  py -3.12 -m venv venv
+  .\venv\Scripts\Activate.ps1
+  python -m pip install --upgrade pip setuptools wheel
+  python -m pip install -r requirements.txt --no-cache-dir
+  ```
+
+### ❌ "ModuleNotFoundError" for `flask`, `pandas`, or another package
 - Virtual environment not activated
 - **Solution**: Run activation command again:
-  - Windows: `venv\Scripts\activate`
-  - macOS/Linux: `source venv/bin/activate`
+- Windows PowerShell: `.\venv\Scripts\Activate.ps1`
+- Windows Command Prompt: `venv\Scripts\activate.bat`
+- macOS/Linux: `source venv/bin/activate`
 
 ### ❌ "pip: command not found"
 - Virtual environment not active
@@ -242,7 +276,7 @@ MIT License - Feel free to use and modify
 
 ## Technologies
 
-- Python 3.8+
+- Python 3.9-3.12
 - Pandas, NumPy
 - NLTK, Scikit-learn
 - Flask

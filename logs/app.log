@@ -1437,3 +1437,174 @@
 2026-04-15 15:34:55 | INFO     | =======================================================
 2026-04-15 15:34:55 | WARNING  |  * Debugger is active!
 2026-04-15 15:34:55 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-22 14:43:11 | INFO     | =======================================================
+2026-04-22 14:43:11 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-22 14:43:11 | INFO     | =======================================================
+2026-04-22 14:43:11 | INFO     |  URL      : http://localhost:5000
+2026-04-22 14:43:11 | INFO     |  Debug    : True
+2026-04-22 14:43:11 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-22 14:43:11 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-22 14:43:11 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-22 14:43:11 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-22 14:43:11 | INFO     | =======================================================
+2026-04-22 14:43:11 | INFO     | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.64.35.111:5000
+2026-04-22 14:43:11 | INFO     | [33mPress CTRL+C to quit[0m
+2026-04-22 14:43:11 | INFO     |  * Restarting with stat
+2026-04-22 14:43:14 | INFO     | =======================================================
+2026-04-22 14:43:14 | INFO     |  WhatsApp NLP Analysis System — Starting up
+2026-04-22 14:43:14 | INFO     | =======================================================
+2026-04-22 14:43:14 | INFO     |  URL      : http://localhost:5000
+2026-04-22 14:43:14 | INFO     |  Debug    : True
+2026-04-22 14:43:14 | INFO     |  Uploads  : C:\Users\Public\whatsapp-analyzer\uploads
+2026-04-22 14:43:14 | INFO     |  Charts   : C:\Users\Public\whatsapp-analyzer\results\visualizations
+2026-04-22 14:43:14 | INFO     |  Models   : C:\Users\Public\whatsapp-analyzer\models
+2026-04-22 14:43:14 | INFO     |  Logs     : C:\Users\Public\whatsapp-analyzer\logs\app.log
+2026-04-22 14:43:14 | INFO     | =======================================================
+2026-04-22 14:43:14 | WARNING  |  * Debugger is active!
+2026-04-22 14:43:14 | INFO     |  * Debugger PIN: 761-155-212
+2026-04-22 14:43:18 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:18] "GET / HTTP/1.1" 200 -
+2026-04-22 14:43:18 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:18] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-22 14:43:18 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:18] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-22 14:43:19 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-22 14:43:25 | INFO     | Upload request received
+2026-04-22 14:43:25 | INFO     | File saved: C:\Users\Public\whatsapp-analyzer\uploads\20260422_144325_whatsapp-chat-data.txt
+2026-04-22 14:43:25 | INFO     | Starting pipeline...
+2026-04-22 14:43:25 | INFO     | ==================================================
+2026-04-22 14:43:25 | INFO     | WHATSAPP NLP ANALYSIS PIPELINE STARTED
+2026-04-22 14:43:25 | INFO     | File      : C:\Users\Public\whatsapp-analyzer\uploads\20260422_144325_whatsapp-chat-data.txt
+2026-04-22 14:43:25 | INFO     | Timestamp : 2026-04-22 14:43:25
+2026-04-22 14:43:25 | INFO     | ==================================================
+2026-04-22 14:43:25 | INFO     | STEP 1/7 — Parsing chat file...
+2026-04-22 14:43:25 | INFO     | Reading file: C:\Users\Public\whatsapp-analyzer\uploads\20260422_144325_whatsapp-chat-data.txt
+2026-04-22 14:43:25 | INFO     | Detected format pattern with 30 matches in sample.
+2026-04-22 14:43:25 | INFO     | Found 13655 raw message blocks.
+2026-04-22 14:43:26 | INFO     | Successfully parsed 13379 messages from 154 senders.
+2026-04-22 14:43:26 | INFO     | STEP 2/7 — Cleaning and processing...
+2026-04-22 14:43:26 | INFO     | Starting data processing pipeline...
+2026-04-22 14:43:26 | INFO     | Input: 13379 messages
+2026-04-22 14:43:26 | INFO     | Step 1/3 — Extracting emojis...
+2026-04-22 14:43:26 | INFO     | Step 2/3 — Detecting URLs...
+2026-04-22 14:43:26 | INFO     | Step 3/3 — Cleaning message text...
+2026-04-22 14:43:30 | INFO     | Data processing complete!
+2026-04-22 14:43:30 | INFO     |   Total messages         : 13379
+2026-04-22 14:43:30 | INFO     |   Messages with text     : 9669
+2026-04-22 14:43:30 | INFO     |   Messages with emojis   : 1858 (2247 total emojis)
+2026-04-22 14:43:30 | INFO     |   Messages with URLs     : 575
+2026-04-22 14:43:30 | INFO     |   Mode: FULL — training ML model from scratch
+2026-04-22 14:43:30 | INFO     | STEP 3/7 — NLP feature extraction...
+2026-04-22 14:43:30 | INFO     | Starting NLP processing pipeline...
+2026-04-22 14:43:30 | INFO     | Input: 13379 messages from 154 senders
+2026-04-22 14:43:30 | INFO     | Step 1/6 — Computing word frequencies...
+2026-04-22 14:43:30 | INFO     |   Word frequency: 6564 unique words found.
+2026-04-22 14:43:30 | INFO     | Step 2/6 — Extracting bigrams and trigrams...
+2026-04-22 14:43:30 | INFO     |   2-grams: 30563 unique 2-grams found.
+2026-04-22 14:43:30 | INFO     |   3-grams: 29091 unique 3-grams found.
+2026-04-22 14:43:30 | INFO     | Step 3/6 — Computing TF-IDF keywords per sender...
+2026-04-22 14:43:30 | INFO     |   TF-IDF keywords extracted for 137 senders.
+2026-04-22 14:43:30 | INFO     | Step 4/6 — Computing per-user statistics...
+2026-04-22 14:43:30 | INFO     |   User stats computed for 154 senders.
+2026-04-22 14:43:30 | INFO     | Step 5/6 — Analysing activity patterns...
+2026-04-22 14:43:30 | INFO     |   Activity patterns computed (hour / day / month / date).
+2026-04-22 14:43:30 | INFO     | Step 6/6 — Computing response times...
+2026-04-22 14:43:33 | INFO     |   Response times computed for 145 senders.
+2026-04-22 14:43:33 | INFO     | NLP processing complete!
+2026-04-22 14:43:33 | INFO     |   Total words     : 50,960
+2026-04-22 14:43:33 | INFO     |   Unique words    : 6,564
+2026-04-22 14:43:33 | INFO     |   Bigrams found   : 30,563
+2026-04-22 14:43:33 | INFO     |   Trigrams found  : 29,091
+2026-04-22 14:43:33 | INFO     |   Senders         : 154
+2026-04-22 14:43:33 | INFO     |   Peak hour       : 21:00
+2026-04-22 14:43:33 | INFO     |   Most active day : Sunday
+2026-04-22 14:43:33 | INFO     | STEP 4/7 — Sentiment analysis (VADER + TextBlob)...
+2026-04-22 14:43:33 | INFO     | Starting sentiment analysis...
+2026-04-22 14:43:33 | INFO     | Input: 13379 messages
+2026-04-22 14:43:33 | INFO     | Running VADER + TextBlob on all messages...
+2026-04-22 14:43:42 | INFO     | Sentiment analysis complete!
+2026-04-22 14:43:42 | INFO     |   Positive  :  3395 (25.4%)
+2026-04-22 14:43:42 | INFO     |   Neutral   :  8792 (65.7%)
+2026-04-22 14:43:42 | INFO     |   Negative  :  1192 (8.9%)
+2026-04-22 14:43:42 | INFO     |   Avg score : 0.0774
+2026-04-22 14:43:42 | INFO     | STEP 5/7 — Training ML classifier...
+2026-04-22 14:43:42 | INFO     | Training samples: 462 (2 classes, ~231 each, tier=High)
+2026-04-22 14:43:42 | INFO     | ==================================================
+2026-04-22 14:43:42 | INFO     | Starting ML classifier training...
+2026-04-22 14:43:42 | INFO     | ==================================================
+2026-04-22 14:43:42 | INFO     | Step 1/4 — Preparing training data...
+2026-04-22 14:43:42 | INFO     |   Training data prepared: 462 samples
+2026-04-22 14:43:42 | INFO     |     Positive    : 231 (50.0%)
+2026-04-22 14:43:42 | INFO     |     Negative    : 231 (50.0%)
+2026-04-22 14:43:42 | INFO     | Step 2/4 — Splitting 80% train / 20% test...
+2026-04-22 14:43:42 | INFO     |   Train: 369 samples | Test: 93 samples
+2026-04-22 14:43:42 | INFO     | Step 3/4 — Building model pipelines...
+2026-04-22 14:43:42 | INFO     | Step 4/4 — Training and evaluating models...
+2026-04-22 14:43:42 | INFO     |   Training Naive Bayes...
+2026-04-22 14:43:42 | INFO     |     Accuracy : 0.8817
+2026-04-22 14:43:42 | INFO     |     F1 Score : 0.8817
+2026-04-22 14:43:42 | INFO     |     CV Mean  : 0.8698 (+/- 0.0387)
+2026-04-22 14:43:42 | INFO     |   Training Logistic Regression...
+2026-04-22 14:43:43 | INFO     |     Accuracy : 0.8387
+2026-04-22 14:43:43 | INFO     |     F1 Score : 0.8377
+2026-04-22 14:43:43 | INFO     |     CV Mean  : 0.8936 (+/- 0.0434)
+2026-04-22 14:43:43 | INFO     |   Best model: Naive Bayes (F1: 0.8817)
+2026-04-22 14:43:43 | INFO     | ==================================================
+2026-04-22 14:43:43 | INFO     | Training complete!
+2026-04-22 14:43:43 | INFO     |   Best model : Naive Bayes
+2026-04-22 14:43:43 | INFO     |   Accuracy   : 0.8817
+2026-04-22 14:43:43 | INFO     |   F1 Score   : 0.8817
+2026-04-22 14:43:43 | INFO     |   CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-22 14:43:43 | INFO     | ==================================================
+2026-04-22 14:43:43 | INFO     |     Accuracy   : 0.8817 (88.2%)
+2026-04-22 14:43:43 | INFO     |     F1 Score   : 0.8817
+2026-04-22 14:43:43 | INFO     |     CV Mean    : 0.8698 (+/- 0.0387)
+2026-04-22 14:43:43 | INFO     | STEP 5/7 — Running ML predictions on full chat...
+2026-04-22 14:43:43 | INFO     | VADER vs ML agreement rate: 31.4%
+2026-04-22 14:43:43 | INFO     | STEP 6/7 — Generating charts...
+2026-04-22 14:43:43 | INFO     | Generating all charts...
+2026-04-22 14:43:43 | INFO     | Output directory: results\visualizations
+2026-04-22 14:43:43 | INFO     | Chart 01/10 — wordcloud...
+2026-04-22 14:43:44 | INFO     |   Saved: 01_wordcloud.png
+2026-04-22 14:43:44 | INFO     | Chart 02/10 — top_words...
+2026-04-22 14:43:45 | INFO     |   Saved: 02_top_words.png
+2026-04-22 14:43:45 | INFO     | Chart 03/10 — hourly_activity...
+2026-04-22 14:43:45 | INFO     |   Saved: 03_hourly_activity.png
+2026-04-22 14:43:45 | INFO     | Chart 04/10 — daily_activity...
+2026-04-22 14:43:45 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-22 14:43:45 | INFO     | Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-04-22 14:43:45 | INFO     |   Saved: 04_daily_activity.png
+2026-04-22 14:43:45 | INFO     | Chart 05/10 — monthly_activity...
+2026-04-22 14:43:45 | INFO     |   Saved: 05_monthly_activity.png
+2026-04-22 14:43:45 | INFO     | Chart 06/10 — user_participation...
+2026-04-22 14:43:47 | INFO     |   Saved: 06_user_participation.png
+2026-04-22 14:43:47 | INFO     | Chart 07/10 — top_bigrams...
+2026-04-22 14:43:48 | INFO     |   Saved: 07_top_bigrams.png
+2026-04-22 14:43:48 | INFO     | Chart 08/10 — sentiment_distribution...
+2026-04-22 14:43:48 | INFO     |   Saved: 08_sentiment_distribution.png
+2026-04-22 14:43:48 | INFO     | Chart 09/10 — sentiment_trend...
+2026-04-22 14:43:48 | INFO     |   Saved: 09_sentiment_trend.png
+2026-04-22 14:43:48 | INFO     | Chart 10/10 — sentiment_by_user...
+2026-04-22 14:43:52 | INFO     |   Saved: 10_sentiment_by_user.png
+2026-04-22 14:43:52 | INFO     | Chart generation complete: 10/10 charts saved.
+2026-04-22 14:43:52 | INFO     | STEP 7/7 — Building dashboard summaries...
+2026-04-22 14:43:52 | INFO     | ==================================================
+2026-04-22 14:43:52 | INFO     | PIPELINE COMPLETED SUCCESSFULLY
+2026-04-22 14:43:52 | INFO     | Mode           : FULL
+2026-04-22 14:43:52 | INFO     | ML Trained     : True
+2026-04-22 14:43:52 | INFO     | Processing Time: 26.63s
+2026-04-22 14:43:52 | INFO     | ==================================================
+2026-04-22 14:43:52 | INFO     | Pipeline complete in 26.63s — redirecting to dashboard
+2026-04-22 14:43:52 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:52] "[32mPOST /upload HTTP/1.1[0m" 302 -
+2026-04-22 14:43:52 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:52] "GET /dashboard HTTP/1.1" 200 -
+2026-04-22 14:43:52 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-22 14:43:52 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:43:52] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-22 14:44:05 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:05] "GET /results HTTP/1.1" 200 -
+2026-04-22 14:44:05 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-22 14:44:05 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:05] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-22 14:44:07 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:07] "GET /results HTTP/1.1" 200 -
+2026-04-22 14:44:07 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:07] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-22 14:44:07 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:07] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -
+2026-04-22 14:44:08 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:08] "GET /dashboard HTTP/1.1" 200 -
+2026-04-22 14:44:08 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-22 14:44:08 | INFO     | 127.0.0.1 - - [22/Apr/2026 14:44:08] "[36mGET /static/js/script.js HTTP/1.1[0m" 304 -

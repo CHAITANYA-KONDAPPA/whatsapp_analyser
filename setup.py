@@ -46,10 +46,17 @@ def print_warning(text):
 
 
 def check_python_version():
-    """Verify Python >= 3.9."""
+    """Verify Python 3.9 through 3.12."""
     version = sys.version_info
     if version.major < 3 or (version.major == 3 and version.minor < 9):
-        print_error(f"Python 3.9+ required. You have {version.major}.{version.minor}")
+        print_error(f"Python 3.9-3.12 required. You have {version.major}.{version.minor}")
+        sys.exit(1)
+    if version.major > 3 or (version.major == 3 and version.minor >= 13):
+        print_error(
+            f"Python 3.13+ is not supported by this dependency set. "
+            f"You have {version.major}.{version.minor}."
+        )
+        print("Install Python 3.11 or 3.12, recreate the venv, then run setup again.")
         sys.exit(1)
     print_success(f"Python {version.major}.{version.minor}.{version.micro}")
     return True
