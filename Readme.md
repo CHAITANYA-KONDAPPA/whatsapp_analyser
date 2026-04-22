@@ -251,30 +251,3 @@ MIT License - Feel free to use and modify
 ## License
 
 MIT
-
-## 🧪 Testing Suite (Industry Standard)
-
-**Setup:**
-```bash
-pip install -r requirements.txt
-pre-commit install
-```
-
-**Run Tests:**
-```bash
-pytest --cov  # 80%+ coverage
-black src tests --check  # formatting
-pylint src  # linting
-bandit -r src  # security
-```
-
-**Full CI:**
-```bash
-bash tests/run_tests.sh
-```
-
-**Coverage Report:** `./htmlcov/index.html`
-- Unit: src modules
-- Integration: pipeline
-- E2E: Flask routes
-- Security: bandit scans
